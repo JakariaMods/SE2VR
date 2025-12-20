@@ -1,7 +1,7 @@
 <img alt="Image of the Space Engineers 2 Astronaut wearing a Valve Index" src="https://github.com/user-attachments/assets/4fff1b19-1673-4456-91a8-e5a144050720" />
 
 # SE2VR Plugin
-This is a plugin that adds [OpenVR](https://github.com/ValveSoftware/openvr) support to [Space Engineers 2](https://store.steampowered.com/app/1133870/Space_Engineers_2/). This project aims to provide a seamless VR experience that can be played from start to finish.
+This is a plugin that adds [OpenVR](https://github.com/ValveSoftware/openvr) support to [Space Engineers 2](https://store.steampowered.com/app/1133870/Space_Engineers_2/). This project aims to make the Space Engineers 2 survival experience playable from start to finish in VR.
 
 https://www.youtube.com/watch?v=IntVsKmTe7k
 
