@@ -1,6 +1,5 @@
 ﻿using Keen.Game2.Client.GameSystems.UI3D;
 using Keen.Game2.Client.WorldObjects.Tools;
-using Keen.Game2.Simulation;
 using Keen.Game2.Simulation.GameSystems.EntityDetection;
 using Keen.Game2.Simulation.WorldObjects.Characters;
 using Keen.VRage.Core;
@@ -18,7 +17,6 @@ using Keen.VRage.Library.Memory;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using Keen.VRage.Physics;
 using Keen.VRage.Physics.Queries;
-using Keen.VRage.Physics.Utils;
 using Keen.VRage.Render.Contracts;
 using Keen.VRage.Render.Data;
 
