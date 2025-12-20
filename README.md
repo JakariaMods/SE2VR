@@ -22,12 +22,6 @@ Known issues/limitations:
 
 **Please note that this plugin does not auto-update, and is likely to break between updates.**
 
-
-
-Settings can be configured at the following path after the first run:
-
-%appdata%\SpaceEngineers2\AppData\EngineOptions\OpenVROptions
-
 # Supported controllers
 
 * Valve Index (Mapped, recommended)
@@ -65,3 +59,11 @@ Raytracing/TAA does not behave well with this implementation of VR (It introduce
 **3.** Why is the frame rate low?
 
 The implementation of VR used results in half of the frames being allocated to the left eye, and the other half to the right. This effectively halves the framerate. Enabling motion smoothing in SteamVR should help.
+
+# Settings/Options
+
+VR Options can be configured offline at:
+
+%appdata%\SpaceEngineers2\AppData\EngineOptions\OpenVROptions
+
+You will need to restart the game for them to apply.
