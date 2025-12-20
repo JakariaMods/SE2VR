@@ -10,17 +10,19 @@ https://www.youtube.com/watch?v=CkOQraQ0wsI
 Known issues/limitations:
 * Render is limited to 30fps per eye, this is because render commands are submitted at 60hz (RenderCommandBuffer.Commit is in main thread)
 
-# Running:
+# Running/Installation:
 
-**1.** Download the latest release or compile it yourself
+**1.** Extract the .zip file to a folder (it doesn't matter where) or compile the project yourself (see further below)
 
-**2.** Extract the zip file into a folder
+<img width="774" height="355" alt="image" src="https://github.com/user-attachments/assets/c0a0ab34-2143-4103-901e-e3388262cd73" />
 
-**3.** Add the following launch argument to steam with the correct path
-   
+**2.** Add the following launch argument to Space Engineers 2 with the correct path
+
 -plugins:"C:/Path/To/SE2VR.dll"
 
-**4.** Launch Space Engineers 2. 
+<img width="1041" height="353" alt="image" src="https://github.com/user-attachments/assets/da3382ef-a9d2-4474-88bd-0c372b3cd2e8" />
+
+**3.** Launch Space Engineers 2. Steam VR will open automatically
 
 **Please note that this plugin does not auto-update, and is likely to break between updates.**
 
