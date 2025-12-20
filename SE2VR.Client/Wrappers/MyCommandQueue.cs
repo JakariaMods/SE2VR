@@ -6,8 +6,8 @@ namespace SE2VR.Client.Wrappers;
 
 /// <summary>
 /// My Command Queue
+/// Used to acccess internal type
 /// </summary>
-/// <param name="obj"></param>
 public class MyCommandQueue(object? obj)
 {
 

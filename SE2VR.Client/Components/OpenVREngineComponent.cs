@@ -10,12 +10,11 @@ using Keen.VRage.Library.Diagnostics;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using OpenVRAPI;
-using SE2VR.Client.Components;
 using SE2VR.Client.Input;
 using SE2VR.Simulation;
 using Valve.VR;
 
-namespace SE2VR.Client;
+namespace SE2VR.Client.Components;
 
 /// <summary>
 /// Engine component responsible for handling the lifetime of <see cref="OpenVR"/>. Why doesn't DI work for this?
@@ -107,7 +106,7 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
         OpenVR.Shutdown();
     }
 
-    public void ConfigureSession(SessionBuilder sessionBuilder)
+    void ISessionConfigurator.ConfigureSession(SessionBuilder sessionBuilder)
     {
         if (!Initalized || sessionBuilder.IsServer)
             return;

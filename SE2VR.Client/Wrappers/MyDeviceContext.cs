@@ -5,6 +5,7 @@ namespace SE2VR.Client.Wrappers;
 
 /// <summary>
 /// This is all mine now
+/// Used to acccess internal type
 /// </summary>
 public class MyDeviceContext(object? obj)
 {

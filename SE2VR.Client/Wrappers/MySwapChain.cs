@@ -7,6 +7,7 @@ namespace SE2VR.Client.Wrappers;
 
 /// <summary>
 /// MY SwapChain wrapper
+/// Used to acccess internal type
 /// </summary>
 public class MySwapChain(object? obj)
 {

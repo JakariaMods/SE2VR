@@ -6,7 +6,8 @@ using Keen.VRage.Core.Game.Components;
 using Keen.VRage.Core.Systems;
 using Keen.VRage.DCS.Annotations;
 using Keen.VRage.Library.Reflection.DependencyInjections;
-using static SE2VR.Client.OpenVREngineComponent;
+using SE2VR.Client.Components;
+using static SE2VR.Client.Components.OpenVREngineComponent;
 
 namespace SE2VR.Client.Input;
 

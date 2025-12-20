@@ -33,10 +33,9 @@ using Keen.VRage.Library.Diagnostics;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using Keen.VRage.Library.Utils;
-using SE2VR.Client.Components;
 using SE2VR.Client.Patches;
 
-namespace SE2VR.Client;
+namespace SE2VR.Client.Components;
 
 /// <summary>
 /// Component that is responsible for updating the <see cref="OpenVREngineComponent"/>

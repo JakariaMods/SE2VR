@@ -6,8 +6,8 @@ namespace SE2VR.Client.Wrappers;
 
 /// <summary>
 /// MY BackBuffer :)
+/// Used to acccess internal type
 /// </summary>
-/// <param name="obj"></param>
 public class MyBackBuffer(object? obj)
 {
 

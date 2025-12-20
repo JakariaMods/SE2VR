@@ -1,13 +1,14 @@
 ﻿using System.Reflection;
 using HarmonyLib;
 using Keen.VRage.Library.Mathematics;
+using SE2VR.Client.Components;
 
 namespace SE2VR.Client.Wrappers;
 
 /// <summary>
 /// Patch for scene draw systems, has strange mix of static and non static... see for a fix later
+/// Used to acccess internal type
 /// </summary>
-/// <param name="obj"></param>
 public class MySceneDrawSystem(object? obj)
 {
 #pragma warning disable KN023

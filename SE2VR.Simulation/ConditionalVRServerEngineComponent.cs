@@ -10,7 +10,7 @@ namespace SE2VR.Simulation;
 /// </summary>
 public partial class ConditionalVRServerEngineComponent : EngineComponent, ISessionConfigurator
 {
-    public void ConfigureSession(SessionBuilder sessionBuilder)
+    void ISessionConfigurator.ConfigureSession(SessionBuilder sessionBuilder)
     {
         //We may want jobs to run on server and client
         sessionBuilder.SceneBuilder.AddJobsFromAssembly(typeof(PhysicsHandServerSessionComponent).Assembly);

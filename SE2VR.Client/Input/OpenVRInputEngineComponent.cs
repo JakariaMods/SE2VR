@@ -14,8 +14,9 @@ using Keen.VRage.Library.Diagnostics;
 using Keen.VRage.Library.Extensions;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
+using SE2VR.Client.Components;
 using Valve.VR;
-using static SE2VR.Client.OpenVREngineComponent;
+using static SE2VR.Client.Components.OpenVREngineComponent;
 
 namespace SE2VR.Client.Input;
 

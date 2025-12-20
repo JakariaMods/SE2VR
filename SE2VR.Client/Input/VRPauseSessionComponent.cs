@@ -14,6 +14,7 @@ using Keen.VRage.Input;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using Keen.VRage.Library.Utils;
 using Keen.VRage.UI.EngineComponents;
+using SE2VR.Client.Components;
 using SE2VR.Client.Patches;
 using Valve.VR;
 

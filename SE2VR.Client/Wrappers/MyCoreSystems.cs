@@ -5,6 +5,7 @@ namespace SE2VR.Client.Wrappers;
 
 /// <summary>
 /// CoreSystems is an internal class, this is MY Core Systems, not keens.
+/// Used to acccess internal type
 /// </summary>
 public static class MyCoreSystems
 {

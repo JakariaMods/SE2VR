@@ -13,7 +13,7 @@ namespace SE2VR.Client;
 [Serialize]
 public partial class OpenVROptions : ObservableObject, IOptionsPart
 {
-    private const float CHARACTER_EYE_HEIGHT = 1.75f;
+    private const float CHARACTER_HEIGHT = 1.75f;
 
     /// <summary>
     /// When true, a 3D representation of the crosshair will be drawn at the interaction point depending on where your primary hand is oriented.
@@ -46,10 +46,10 @@ public partial class OpenVROptions : ObservableObject, IOptionsPart
     private float _crouchHeight = 1;
 
     /// <summary>
-    /// Height of the player (from eyes to ground) in meters. Used to scale the player to a uniform height
+    /// Height of the player in meters. Used to scale the player to a uniform height
     /// </summary>
     [Notify, Length]
-    private float _playerHeight = CHARACTER_EYE_HEIGHT;
+    private float _playerHeight = CHARACTER_HEIGHT;
 
     /// <summary>
     /// When true, the HMD will be used as a flat-screen camera instead.
@@ -71,7 +71,7 @@ public partial class OpenVROptions : ObservableObject, IOptionsPart
         OnPropertyChanged();
     }
 
-    public float GetScale() => CHARACTER_EYE_HEIGHT / _playerHeight;
+    public float GetScale() => CHARACTER_HEIGHT / _playerHeight;
 
     public RelativeTransform Rescale(RelativeTransform transform)
     {
