@@ -16,9 +16,9 @@ public static class MyCoreSystems
     private static readonly FieldInfo _sceneDrawSystemField;
 #pragma warning restore KN023
 
-    public static MySwapChain SwapChain => new MySwapChain(_swapChainField.GetValue(null));
-    public static MyDeviceContext DeviceContext => new MyDeviceContext(_deviceContextField.GetValue(null));
-    public static MySceneDrawSystem SceneDrawSystem => new MySceneDrawSystem(_sceneDrawSystemField.GetValue(null));
+    public static MySwapChain SwapChain => new(_swapChainField.GetValue(null));
+    public static MyDeviceContext DeviceContext => new(_deviceContextField.GetValue(null));
+    public static MySceneDrawSystem SceneDrawSystem => new(_sceneDrawSystemField.GetValue(null));
 
     static MyCoreSystems()
     {

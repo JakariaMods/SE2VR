@@ -11,11 +11,9 @@ namespace SE2VR.Client.Wrappers;
 /// </summary>
 public class MySceneDrawSystem(object? obj)
 {
-#pragma warning disable KN023
     private static MethodInfo? _drawMethod;
     public static PreDrawDelegate? PreDraw;
     public static PostDrawDelegate? PostDraw;
-#pragma warning restore KN023
 
     public delegate void PreDrawDelegate(ref Vector2I finalResolution, ref bool isComputeQueueBranched);
     public delegate void PostDrawDelegate();

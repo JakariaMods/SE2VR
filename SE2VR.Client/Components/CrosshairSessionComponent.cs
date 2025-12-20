@@ -74,7 +74,7 @@ public partial class CrosshairSessionComponent : SessionComponent, IInSceneListe
             Direction = wt.Orientation.GetForward() * 10
         }, CollisionPreset.Bodies);
 
-        DetectionResult result = new DetectionResult();
+        var result = new DetectionResult();
         RaycastEntityDetectorHelper.ProcessHits(hits, new RayD(wt.Position, wt.Orientation.GetForward() * 10), ref result, new DetectionArgs
         {
             AllowDuplication = false,

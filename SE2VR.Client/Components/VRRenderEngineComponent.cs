@@ -36,7 +36,7 @@ public partial class VRRenderEngineComponent : EngineComponent
 
     private EVREye _currentPass;
     private EVREye _preparedPass;
-    private VRTextureBounds_t _imageBounds = new VRTextureBounds_t { uMax = 1, vMax = 1 };
+    private VRTextureBounds_t _imageBounds = new() { uMax = 1, vMax = 1 };
     private OpenVROptions _vrOptions;
     private SimpleOverlay? _overlay;
 
@@ -112,7 +112,6 @@ public partial class VRRenderEngineComponent : EngineComponent
         if (OpenVR.Compositor == null)
             return;
 
-        Logging.Debug($"Current: {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.Name}");
         if (_preparedPass == _currentPass)
         {
             Logging.Debug($"Already Prepared {_currentPass}");
@@ -145,7 +144,7 @@ public partial class VRRenderEngineComponent : EngineComponent
         {
             WorldTransform wt = Body.Data.GetWorldTransform();
             wt.Position += WorldTransform.TransformDirection(_vrOptions.WorldOffset, wt);
-            wt = wt * HMD;
+            wt *= HMD;
 
             if (GameWindowPatch.CursorVisible)
             {
@@ -213,7 +212,7 @@ public partial class VRRenderEngineComponent : EngineComponent
         };
         Marshal.StructureToPtr(data, _texturePtr, false);
 
-        Texture_t input = new Texture_t
+        var input = new Texture_t
         {
             eColorSpace = EColorSpace.Auto,
             eType = ETextureType.DirectX12,

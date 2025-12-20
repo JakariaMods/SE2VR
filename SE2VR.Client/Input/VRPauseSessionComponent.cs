@@ -52,10 +52,10 @@ public partial class VRPauseSessionComponent : SessionComponent
             return;
 
         _terminal = screen;
-        _terminal.OnDisposed += _terminal_OnDisposed;
+        _terminal.OnDisposed += OnTerminalDisposed;
     }
 
-    private void _terminal_OnDisposed(IObservableDisposable obj)
+    private void OnTerminalDisposed(IObservableDisposable obj)
     {
         _terminal = null;
     }
@@ -64,7 +64,7 @@ public partial class VRPauseSessionComponent : SessionComponent
     [OpenVRInputEngineComponent.OpenVRInput]
     private void UpdateDashboardState()
     {
-        VREvent_t vrEvent = new VREvent_t();
+        var vrEvent = new VREvent_t();
         uint eventSize = (uint)Marshal.SizeOf<VREvent_t>();
 
         while (OpenVR.System.PollNextEvent(ref vrEvent, eventSize))

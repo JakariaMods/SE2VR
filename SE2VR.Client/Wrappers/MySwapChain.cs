@@ -31,19 +31,4 @@ public class MySwapChain(object? obj)
     }
 
     public IDXGISwapChain3 GetD3DSwapChain() => (IDXGISwapChain3)_d3dSwapChainField.GetValue(obj)!;
-
-    public RenderDisplaySettings? GetRenderDisplaySettings() => (RenderDisplaySettings?)_currentDisplaySettingsField.GetValue(obj);
-
-    public MyBackBuffer[]? GetBackBuffers()
-    {
-        var backBuffers = (Array)_backBuffersField.GetValue(obj)!;
-        if (backBuffers == null || backBuffers.Length == 0) 
-            return null;
-
-        var myBackBuffers = new MyBackBuffer[backBuffers.Length];
-        for (int i = 0; i < backBuffers.Length; i++)
-            myBackBuffers[i] = new MyBackBuffer(backBuffers.GetValue(i));
-
-        return myBackBuffers;
-    }
 }

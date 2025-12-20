@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Keen.VRage.Core;
 using Keen.VRage.Library.Mathematics;
+using Keen.VRage.Library.Memory;
 using Valve.VR;
 
 namespace OpenVRAPI;
@@ -68,11 +69,11 @@ public static class VRUtils
     public static string GetDeviceProperty(uint deviceIndex, ETrackedDeviceProperty prop)
     {
         var error = ETrackedPropertyError.TrackedProp_Success;
-
-        StringBuilder sb = new StringBuilder((int)OpenVR.k_unMaxPropertyStringSize);
+        var sb = StringBuilderPool.Get();
+        sb.EnsureCapacity((int)OpenVR.k_unMaxPropertyStringSize);
         OpenVR.System.GetStringTrackedDeviceProperty(deviceIndex, prop, sb, OpenVR.k_unMaxPropertyStringSize, ref error);
 
-        return sb.ToString();
+        return StringBuilderPool.ToStringAndReturn(sb);
     }
 
     /// <summary>

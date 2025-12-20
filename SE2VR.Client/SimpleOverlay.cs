@@ -56,7 +56,12 @@ public class SimpleOverlay : IDisposable
         OpenVR.Overlay.HideOverlay(_overlayHandle);
     }
 
-    private HmdMatrix34_t MultiplyMatrices(HmdMatrix34_t matA, HmdMatrix34_t matB)
+    public void SetTexture(ref Texture_t texture)
+    {
+        OpenVR.Overlay.SetOverlayTexture(_overlayHandle, ref texture);
+    }
+
+    private static HmdMatrix34_t MultiplyMatrices(HmdMatrix34_t matA, HmdMatrix34_t matB)
     {
         return new HmdMatrix34_t()
         {
@@ -75,10 +80,5 @@ public class SimpleOverlay : IDisposable
             m10 = matA.m8 * matB.m2 + matA.m9 * matB.m6 + matA.m10 * matB.m10,
             m11 = matA.m8 * matB.m3 + matA.m9 * matB.m7 + matA.m10 * matB.m11 + matA.m11,
         };
-    }
-
-    public void SetTexture(ref Texture_t texture)
-    {
-        OpenVR.Overlay.SetOverlayTexture(_overlayHandle, ref texture);
     }
 }

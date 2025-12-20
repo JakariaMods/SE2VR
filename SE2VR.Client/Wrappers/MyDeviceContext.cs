@@ -23,5 +23,5 @@ public class MyDeviceContext(object? obj)
         _presentQueueField = AccessTools.Field(type, "<PresentQueue>k__BackingField");
     }
 
-    public MyCommandQueue GetPresentQueue() => new MyCommandQueue(_presentQueueField.GetValue(obj));
+    public MyCommandQueue GetPresentQueue() => new(_presentQueueField.GetValue(obj));
 }

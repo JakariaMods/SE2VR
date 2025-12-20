@@ -54,7 +54,7 @@ public partial class OpenVRInputEngineComponent : Component
     [Component]
     private readonly GameInputProcessorComponent _input;
 
-    public readonly Dictionary<ulong, VRInputSet> ActionSets = new Dictionary<ulong, VRInputSet>();
+    public readonly Dictionary<ulong, VRInputSet> ActionSets = new();
     private VRActiveActionSet_t[] _pushedActionSets = null!;
     private OpenVROptions _vrOptions = null!;
 
@@ -68,8 +68,6 @@ public partial class OpenVRInputEngineComponent : Component
             return;
 
         _vrOptions = _options.GetOrCreatePart<OpenVROptions>();
-
-        var array = DefinitionManager.Instance.GetDefinitionsOfType<InputActionDefinition>().ToImmutableArray();
 
         string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, ACTIONS_FILE);
         if (OpenVR.Input.SetActionManifestPath(path) != EVRInputError.None)
