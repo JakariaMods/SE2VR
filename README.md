@@ -42,7 +42,7 @@ Settings can be configured at the following path after the first run:
 
 * UI interaction is currently done using the VR dashboard. Whenever mouse input is accepted, the VR dashboard will automatically open, where you can use your VR hand to drag and click on the projected screen.
 
-* To close the UI, click the close button in the screen (top right for terminal screen, bottom left for pause screen) and then press your VR dashboard button. It is not possible to automatically close the dashboard.
+* To close the in-game UI, close the dashboard. If the UI does not automatically close, report it with STR.
 
 # Steps to compile the project yourself:
 
