@@ -1,5 +1,7 @@
-# SE2VR Plugin
-This is a plugin that adds [OpenVR](https://github.com/ValveSoftware/openvr) support to [Space Engineers 2](https://store.steampowered.com/app/1133870/Space_Engineers_2/). This project aims to provide a seamless VR experience that can be played from start to finish.
+<img alt="Image of the Space Engineers 2 Astronaut wearing a Valve Index" src="https://github.com/user-attachments/assets/4fff1b19-1673-4456-91a8-e5a144050720" />
+
+# SE2VR Plugin (VS2.0.2.47)
+This is a plugin that adds [OpenVR](https://github.com/ValveSoftware/openvr) support to [Space Engineers 2](https://store.steampowered.com/app/1133870/Space_Engineers_2/). This project aims to make the Space Engineers 2 survival experience playable from start to finish in VR.
 
 https://www.youtube.com/watch?v=IntVsKmTe7k
 
@@ -22,12 +24,6 @@ Known issues/limitations:
 
 **Please note that this plugin does not auto-update, and is likely to break between updates.**
 
-
-
-Settings can be configured at the following path after the first run:
-
-%appdata%\SpaceEngineers2\AppData\EngineOptions\OpenVROptions
-
 # Supported controllers
 
 * Valve Index (Mapped, recommended)
@@ -42,7 +38,7 @@ Settings can be configured at the following path after the first run:
 
 * UI interaction is currently done using the VR dashboard. Whenever mouse input is accepted, the VR dashboard will automatically open, where you can use your VR hand to drag and click on the projected screen.
 
-* To close the UI, click the close button in the screen (top right for terminal screen, bottom left for pause screen) and then press your VR dashboard button. It is not possible to automatically close the dashboard.
+* To close the in-game UI, close the dashboard. If the UI does not automatically close, report it with STR.
 
 # Steps to compile the project yourself:
 
@@ -65,3 +61,11 @@ Raytracing/TAA does not behave well with this implementation of VR (It introduce
 **3.** Why is the frame rate low?
 
 The implementation of VR used results in half of the frames being allocated to the left eye, and the other half to the right. This effectively halves the framerate. Enabling motion smoothing in SteamVR should help.
+
+# Settings/Options
+
+VR Options can be configured offline at:
+
+%appdata%\SpaceEngineers2\AppData\EngineOptions\OpenVROptions
+
+You will need to restart the game for them to apply.
