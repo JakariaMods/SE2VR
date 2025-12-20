@@ -1,0 +1,15 @@
+﻿{
+  "applications": [
+    {
+      "app_key": "SpaceEngineers2.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "actions.json",
+      "strings": {
+        "en_us": {
+          "name": "Space Engineers 2"
+        }
+      }
+    }
+  ]
+}

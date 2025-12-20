@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+	<!-- Weave in 0Harmony.dll into our DLL to make distribution easier? -->
+	<!-- This could be helpful for any other dependencies we might use later. -->
+  <Costura CreateTemporaryAssemblies='true'>
+    <IncludeAssemblies>
+		0Harmony
+	</IncludeAssemblies>
+  </Costura>
+</Weavers>

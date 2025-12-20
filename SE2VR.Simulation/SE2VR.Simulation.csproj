@@ -1,0 +1,126 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<Platforms>x64</Platforms>
+	  <VRageBundleName>$(AssemblyName)</VRageBundleName>
+	  <VRageBundleVersion>1.1.1.1</VRageBundleVersion>
+	<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<Analyzer Include="..\GameLibs\VRage.CodeGuard.Analyzers.dll" />
+		<Analyzer Include="..\GameLibs\VRage.CodeAnalysis.dll" />
+		<Analyzer Include="..\GameLibs\VRage.Library.Generator.dll" />
+		<Analyzer Include="..\GameLibs\VRage.DCS.Generator.dll" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <CompilerVisibleProperty Include="VRageBundleName" />
+	  <CompilerVisibleProperty Include="VRageBundleVersion" />
+    <PackageReference Include="NoAlloq" Version="0.2.0" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Game2.Client">
+			<HintPath>..\GameLibs\Game2.Client.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Game2.Game">
+			<HintPath>..\GameLibs\Game2.Game.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Game2.Simulation">
+			<HintPath>..\GameLibs\Game2.Simulation.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="SharpGen.Runtime">
+			<HintPath>..\GameLibs\SharpGen.Runtime.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="SharpGen.Runtime.COM">
+			<HintPath>..\GameLibs\SharpGen.Runtime.COM.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="SpaceEngineers2">
+			<HintPath>..\GameLibs\SpaceEngineers2.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Vortice.Direct3D12">
+			<HintPath>..\GameLibs\Vortice.Direct3D12.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Vortice.DirectX">
+			<HintPath>..\GameLibs\Vortice.DirectX.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="Vortice.DXGI">
+			<HintPath>..\GameLibs\Vortice.DXGI.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Animation">
+			<HintPath>..\GameLibs\VRage.Animation.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Animation.Client">
+			<HintPath>..\GameLibs\VRage.Animation.Client.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Core">
+			<HintPath>..\GameLibs\VRage.Core.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Core.Game">
+			<HintPath>..\GameLibs\VRage.Core.Game.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.DCS">
+			<HintPath>..\GameLibs\VRage.DCS.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Game">
+			<HintPath>..\GameLibs\VRage.Game.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Game.Client">
+			<HintPath>..\GameLibs\VRage.Game.Client.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Input">
+			<HintPath>..\GameLibs\VRage.Input.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Library">
+			<HintPath>..\GameLibs\VRage.Library.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Multiplayer">
+		  <HintPath>..\GameLibs\VRage.Multiplayer.dll</HintPath>
+		  <Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Physics">
+			<HintPath>..\GameLibs\VRage.Physics.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.Render">
+			<HintPath>..\GameLibs\VRage.Render.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+		<Reference Include="VRage.UI">
+			<HintPath>..\GameLibs\VRage.UI.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+
+</Project>

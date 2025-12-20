@@ -1,0 +1,227 @@
+{
+   "action_manifest_version" : 0,
+   "alias_info" : {},
+   "app_key" : "steam.app.1133870",
+   "bindings" : {
+      "/actions/build" : {
+         "chords" : [],
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/build/in/deleteblock"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/right/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/build/in/sliderotate"
+                  }
+               },
+               "mode" : "trigger",
+               "parameters" : {},
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "value" : {
+                     "output" : "/actions/build/in/DeleteBlock"
+                  }
+               },
+               "mode" : "scalar_constant",
+               "parameters" : {},
+               "path" : "/user/hand/left/input/grip"
+            }
+         ]
+      },
+      "/actions/default" : {
+         "chords" : [],
+         "haptics" : [
+            {
+               "output" : "/actions/default/out/haptic",
+               "path" : "/user/hand/left/output/haptic"
+            },
+            {
+               "output" : "/actions/default/out/haptic",
+               "path" : "/user/hand/right/output/haptic"
+            }
+         ],
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : [
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/InteractPrimary"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/InteractSecondary"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/default/in/move"
+                  }
+               },
+               "mode" : "trackpad",
+               "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/default/in/look"
+                  }
+               },
+               "mode" : "trackpad",
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/inventory"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/left/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/build/in/SlideRotate"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/left/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/speedboost"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "double" : {
+                     "output" : "/actions/default/in/togglejetpack"
+                  },
+                  "held" : {
+                     "output" : "/actions/default/in/moveup"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/right/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "east" : {
+                     "output" : "/actions/default/in/rollright"
+                  },
+                  "west" : {
+                     "output" : "/actions/default/in/rollleft"
+                  }
+               },
+               "mode" : "dpad",
+               "parameters" : {
+                  "sub_mode" : "click"
+               },
+               "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {},
+               "mode" : "none",
+               "parameters" : {},
+               "path" : "/user/hand/right/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "value" : {
+                     "output" : "/actions/default/in/cycletoolbartile"
+                  }
+               },
+               "mode" : "scalar_constant",
+               "parameters" : {},
+               "path" : "/user/hand/left/input/grip"
+            }
+         ]
+      },
+      "/actions/menu" : {
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : [
+            {
+               "inputs" : {
+                  "east" : {
+                     "output" : "/actions/menu/in/uiright"
+                  },
+                  "north" : {
+                     "output" : "/actions/menu/in/uiup"
+                  },
+                  "south" : {
+                     "output" : "/actions/menu/in/uidown"
+                  },
+                  "west" : {
+                     "output" : "/actions/menu/in/uileft"
+                  }
+               },
+               "mode" : "dpad",
+               "parameters" : {
+                  "sub_mode" : "touch"
+               },
+               "path" : "/user/hand/right/input/trackpad"
+            }
+         ]
+      },
+      "/actions/paint" : {
+         "poses" : [],
+         "skeleton" : [],
+         "sources" : [
+          {
+            "inputs": {
+              "value": {
+                "output": "/actions/paint/in/cyclecolor"
+              }
+            },
+            "mode": "scalar_constant",
+            "parameters": {},
+            "path": "/user/hand/right/input/grip"
+          }
+         ]
+      }
+   },
+   "category" : "steamvr_input",
+   "controller_type" : "vive_controller",
+   "description" : "Supported, but not recommended",
+   "interaction_profile" : "",
+   "name" : "Vive Two-Handed",
+   "options" : {
+      "simulate_hmd" : true,
+      "simulate_rendermodel" : true,
+      "simulated_controller_type" : "knuckles"
+   },
+   "simulated_actions" : []
+}

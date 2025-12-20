@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "VRAGE3VR": {
+      "commandName": "Project"
+    },
+    "Start": {
+      "commandName": "Executable",
+      "executablePath": "E:\\SteamLibrary\\steamapps\\common\\SpaceEngineers2\\Game2\\SpaceEngineers2.exe",
+      "commandLineArgs": "-noSplash -plugins:\"C:\\Users\\minec\\source\\repos\\VRAGE3VR\\bin\\x64\\Debug\\net8.0-windows\\VRAGE3VR.dll\""
+    }
+  }
+}

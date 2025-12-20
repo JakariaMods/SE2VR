@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE2VR", "SE2VR\SE2VR.csproj", "{F5ECBCC6-CE0A-491C-A3BA-06C81E718B90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenVRAPI", "OpenVR\OpenVRAPI.csproj", "{E90D8085-23B4-47E0-82AB-3C7D05C90115}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{823656CF-3DB8-4D54-B1E1-DFF388519A99}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE2VR.Client", "SE2VR.Client\SE2VR.Client.csproj", "{9DA2AD4A-C1E6-31B5-C7D5-C53A7F061F62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE2VR.Simulation", "SE2VR.Simulation\SE2VR.Simulation.csproj", "{F702AE10-F65D-2FBE-654B-A63054D2FBBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5ECBCC6-CE0A-491C-A3BA-06C81E718B90}.Debug|x64.ActiveCfg = Debug|x64
+		{F5ECBCC6-CE0A-491C-A3BA-06C81E718B90}.Debug|x64.Build.0 = Debug|x64
+		{F5ECBCC6-CE0A-491C-A3BA-06C81E718B90}.Release|x64.ActiveCfg = Release|x64
+		{F5ECBCC6-CE0A-491C-A3BA-06C81E718B90}.Release|x64.Build.0 = Release|x64
+		{E90D8085-23B4-47E0-82AB-3C7D05C90115}.Debug|x64.ActiveCfg = Debug|x64
+		{E90D8085-23B4-47E0-82AB-3C7D05C90115}.Debug|x64.Build.0 = Debug|x64
+		{E90D8085-23B4-47E0-82AB-3C7D05C90115}.Release|x64.ActiveCfg = Release|x64
+		{E90D8085-23B4-47E0-82AB-3C7D05C90115}.Release|x64.Build.0 = Release|x64
+		{9DA2AD4A-C1E6-31B5-C7D5-C53A7F061F62}.Debug|x64.ActiveCfg = Debug|x64
+		{9DA2AD4A-C1E6-31B5-C7D5-C53A7F061F62}.Debug|x64.Build.0 = Debug|x64
+		{9DA2AD4A-C1E6-31B5-C7D5-C53A7F061F62}.Release|x64.ActiveCfg = Release|x64
+		{9DA2AD4A-C1E6-31B5-C7D5-C53A7F061F62}.Release|x64.Build.0 = Release|x64
+		{F702AE10-F65D-2FBE-654B-A63054D2FBBB}.Debug|x64.ActiveCfg = Debug|x64
+		{F702AE10-F65D-2FBE-654B-A63054D2FBBB}.Debug|x64.Build.0 = Debug|x64
+		{F702AE10-F65D-2FBE-654B-A63054D2FBBB}.Release|x64.ActiveCfg = Release|x64
+		{F702AE10-F65D-2FBE-654B-A63054D2FBBB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {280F3728-5D2E-49CB-9041-C5FA7230821C}
+	EndGlobalSection
+EndGlobal

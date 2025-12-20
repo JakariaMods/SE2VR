@@ -1,0 +1,153 @@
+{
+  "actions": [
+    {
+      "name": "/actions/default/out/Haptic",
+      "type": "vibration",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/InteractPrimary",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/InteractSecondary",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Move",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/Look",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/MoveUp",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/MoveDown",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/RollRight",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/RollLeft",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/menu/in/UIUp",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/menu/in/UIRight",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/menu/in/UIDown",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/menu/in/UILeft",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/build/in/DeleteBlock",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/build/in/SlideRotate",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/paint/in/CycleColor",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/CycleToolbarTile",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/SpeedBoost",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ToggleJetpack",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ToggleLights",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Terminal",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Inventory",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Pause",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/Map",
+      "type": "boolean"
+    }
+  ],
+  "action_sets": [
+    {
+      "name": "/actions/default",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/build",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/menu",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/paint",
+      "usage": "single"
+    }
+  ],
+  "default_bindings": [
+    {
+      "controller_type": "knuckles",
+      "binding_url": "bindings_knuckles.json"
+    },
+    {
+      "controller_type": "vive_controller",
+      "binding_url": "bindings_vive.json"
+    }
+  ],
+  "localization": [
+    {
+      "language_tag": "en_US",
+      "/actions/default/in/InteractPrimary": "Interact Primary (Tool Primary, Place Block, UI, etc)",
+      "/actions/default/in/InteractSecondary": "Interact Secondary (Tool Secondary)",
+      "/actions/default/in/Move": "Move",
+      "/actions/default/in/Look": "Look",
+      "/actions/default/in/MoveUp": "Move Up (Jump)",
+      "/actions/default/in/MoveDown": "Move Down",
+      "/actions/default/in/RollRight": "Roll Right",
+      "/actions/default/in/RollLeft": "Roll Left",
+      "/actions/build/in/DeleteBlock": "Delete",
+      "/actions/build/in/SlideRotate": "Slide/Rotate",
+      "/actions/paint/in/CycleColor": "Cycle Paint Palette Color",
+      "/actions/default/in/CycleToolbarTile": "Cycle Toolbar Tile",
+      "/actions/default/in/SpeedBoost": "Sprint/Speed Boost",
+      "/actions/default/in/ToggleJetpack": "Toggle Jetpack",
+      "/actions/default/in/ToggleLights": "Toggle Lights",
+      "/actions/default/in/Pause": "Pause",
+      "/actions/default/in/Terminal": "Terminal Screen",
+      "/actions/default/in/Inventory": "Inventory Screen",
+      "/actions/default/in/Map": "Map"
+    }
+  ]
+}
