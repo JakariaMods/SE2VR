@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using HarmonyLib;
+using Keen.Game2.Client.RuntimeSystems.CoreScenes;
 using Keen.VRage.Core;
 using Keen.VRage.Core.EngineComponents;
 using Keen.VRage.Core.Game.Systems;
@@ -39,6 +40,9 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
 
     [Service]
     private readonly IOptions _options;
+
+    [Configuration]
+    private readonly GameRenderComponentCoreConfiguration _renderConfig;
 
     public CVRSystem System = null!;
     public OpenVROptions VROptions = null!;
@@ -90,6 +94,8 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
 
         Harmony = new Harmony(HARMONY_ID);
         Harmony.PatchAll();
+
+        _renderConfig.HideAlphaBanner();
     }
 
     [Destructor]
