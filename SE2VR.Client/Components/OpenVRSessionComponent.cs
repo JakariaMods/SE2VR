@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Keen.Game2.Client.GameSystems.BlockPlacement;
 using Keen.Game2.Client.GameSystems.CameraSystems;
 using Keen.Game2.Client.GameSystems.CameraSystems.Helpers;
 using Keen.Game2.Client.GameSystems.CameraSystems.Modes;
@@ -67,6 +68,8 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
     private Entity? _leftController;
     private PresetIdTypeDefinition _hideBodyPreset;
 
+    private bool _originalAutoRotation;
+
     [Init]
     protected new void Init()
     {
@@ -79,6 +82,16 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
 
         DefinitionManager.Instance.TryGetDefinition(new Guid("44169cc8-0450-4100-9232-f646932c7e62"), out var def);
         _hideBodyPreset = (PresetIdTypeDefinition)def!;
+
+        //The player should rotate their hand to rotate the block preview
+        _originalAutoRotation = _options.GetOrCreatePart<BlockPlacerOptions>().AutoRotation;
+        _options.GetOrCreatePart<BlockPlacerOptions>().AutoRotation = true;
+    }
+
+    [Destructor]
+    protected void Destroy()
+    {
+        _options.GetOrCreatePart<BlockPlacerOptions>().AutoRotation = _originalAutoRotation;
     }
 
     void IInSceneListener.OnAddedToScene()
