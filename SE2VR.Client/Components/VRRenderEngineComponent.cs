@@ -5,6 +5,7 @@ using Keen.VRage.Core.EngineComponents;
 using Keen.VRage.Core.Game.Components;
 using Keen.VRage.Core.Game.Data;
 using Keen.VRage.Core.Game.Systems;
+using Keen.VRage.Core.Render;
 using Keen.VRage.DCS.Annotations;
 using Keen.VRage.DCS.Components;
 using Keen.VRage.Library.Mathematics;
@@ -23,7 +24,6 @@ namespace SE2VR.Client.Components;
 /// <summary>
 /// Manage the rendering of the HMD
 /// </summary>
-[DefaultTag("VRRender")]
 public partial class VRRenderEngineComponent : EngineComponent
 {
     public CameraComponent? Camera;
@@ -155,30 +155,30 @@ public partial class VRRenderEngineComponent : EngineComponent
 
         if (Camera != null && Body != null)
         {
-            WorldTransform wt = Body.Data.GetWorldTransform();
-            wt.Position += WorldTransform.TransformDirection(_vrOptions.WorldOffset, wt);
-            wt *= HMD;
+            var body = Body.Data.GetWorldTransform();
+            body.Position += Vector3D.Transform(_vrOptions.WorldOffset, body.Orientation);
 
-            if (GameWindowPatch.CursorVisible)
+            var head = body * HMD;
+            var eyeToHead = VRUtils.ToTransform(OpenVREngineComponent.Instance.System.GetEyeToHeadTransform(_currentPass));
+            eyeToHead.Position *= _vrOptions.GetScale();
+
+            var wt = body * (HMD * eyeToHead);
+
+            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Green, true, TimeSpan.FromMilliseconds(50));
+            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Blue, true, TimeSpan.FromMilliseconds(50));
+            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(head.Position, head.Position + (head.Orientation.GetForward() / 4), ColorSRGB.Green, true);
+
+            if (wt.IsValid() && !GameWindowPatch.CursorVisible)
             {
-                MatrixPatch.CurrentEye = null;
-                CameraPatch.Transform = null;
+                CameraPatch.Transform = wt;
+
+                if (_vrOptions.CameraMode)
+                    MatrixPatch.CurrentEye = _currentPass;
             }
             else
             {
-                if (_vrOptions.CameraMode)
-                {
-                    MatrixPatch.CurrentEye = null;
-                }
-                else
-                {
-                    var eyeMatrix = OpenVREngineComponent.Instance.System.GetEyeToHeadTransform(_currentPass);
-                    wt.Position += Vector3.Transform(VRUtils.ToTransform(eyeMatrix).Position, wt.Orientation) * _vrOptions.GetScale();
-                    MatrixPatch.CurrentEye = _currentPass;
-                }
-
-                if (wt.IsValid())
-                    CameraPatch.Transform = wt;
+                CameraPatch.Transform = null;
+                MatrixPatch.CurrentEye = null;
             }
 
             Camera.UpdateRenderSettings();
