@@ -1,20 +1,18 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using System.Runtime.InteropServices;
+using HarmonyLib;
 using Keen.Game2.Client.RuntimeSystems.CoreScenes;
 using Keen.VRage.Core;
 using Keen.VRage.Core.EngineComponents;
 using Keen.VRage.Core.Game.Systems;
-using Keen.VRage.Core.Platform.CrashReporting;
 using Keen.VRage.Core.Systems;
 using Keen.VRage.DCS.Annotations;
 using Keen.VRage.Library.Diagnostics;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
-using Keen.VRage.Library.Utils;
 using OpenVRAPI;
 using SE2VR.Client.Input;
 using SE2VR.Simulation;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using Valve.VR;
 
 namespace SE2VR.Client.Components;

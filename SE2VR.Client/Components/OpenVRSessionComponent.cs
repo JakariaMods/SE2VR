@@ -1,4 +1,4 @@
-﻿using Avalonia.Media;
+﻿using System.Reflection;
 using Keen.Game2.Client.GameSystems.BlockPlacement;
 using Keen.Game2.Client.GameSystems.CameraSystems;
 using Keen.Game2.Client.GameSystems.CameraSystems.Helpers;
@@ -37,7 +37,6 @@ using Keen.VRage.Library.Utils;
 using Keen.VRage.Render.Options;
 using SE2VR.Client.Patches;
 using SE2VR.Simulation;
-using System.Reflection;
 
 namespace SE2VR.Client.Components;
 
@@ -88,7 +87,6 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
 
         //The player should rotate their hand to rotate the block preview
         _originalAutoRotation = _options.GetOrCreatePart<BlockPlacerOptions>().AutoRotation;
-       
         Logging.Info($"Loaded into world with resolution of {_options.GetOrCreatePart<RenderDisplayOptionsPart>().Resolution}");
     }
 
