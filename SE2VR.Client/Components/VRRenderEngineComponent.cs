@@ -172,7 +172,7 @@ public partial class VRRenderEngineComponent : EngineComponent
             {
                 CameraPatch.Transform = wt;
 
-                if (_vrOptions.CameraMode)
+                if (!_vrOptions.CameraMode)
                     MatrixPatch.CurrentEye = _currentPass;
             }
             else
