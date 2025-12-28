@@ -312,6 +312,9 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
                     interactionRt = right;
                     interactionRt.Position += interactionRt.Orientation.GetUp() * -0.125f;
                     interactionRt.Orientation *= Quaternion.CreateFromAxisAngle(Vector3.Up, MathF.PI / 2);
+                    interactionRt.Orientation *= Quaternion.CreateFromAxisAngle(Vector3.Forward, MathF.PI / 2);
+                    interactionRt.Orientation *= Quaternion.CreateFromAxisAngle(Vector3.Forward, MathF.PI / 4);
+                    interactionRt.Orientation.Normalize();
                 }
             }
             else

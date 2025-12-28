@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using Keen.Game2.Client.GameSystems.CameraSystems;
+﻿using Keen.Game2.Client.GameSystems.CameraSystems;
 using Keen.VRage.Core;
 using Keen.VRage.Core.EngineComponents;
 using Keen.VRage.Core.Game.Components;
@@ -15,6 +14,7 @@ using OpenVRAPI;
 using SE2VR.Client.Patches;
 using SE2VR.Client.Wrappers;
 using SE2VR.Simulation;
+using System.Runtime.InteropServices;
 using Valve.VR;
 using Vortice.Direct3D12;
 using Vortice.DXGI;
@@ -42,6 +42,8 @@ public partial class VRRenderEngineComponent : EngineComponent
 
     private IntPtr _texturePtr;
 
+    private Vector2I _originalResolution;
+
     [Init]
     protected new void Init()
     {
@@ -65,11 +67,11 @@ public partial class VRRenderEngineComponent : EngineComponent
         if (!_vrOptions.CameraMode)
         {
             var renderOptions = _options.GetOrCreatePart<RenderDisplayOptionsPart>();
+
+            _originalResolution = renderOptions.Resolution;
+
             renderOptions.FullScreen = true;
             renderOptions.Resolution = new Vector2I((int)width, (int)height);
-
-            if (_options.GetOrCreatePart<RenderOptionsPart2>().AntiAliasing == RenderOptions.AntiAliasing.FSR)
-                _options.GetOrCreatePart<RenderOptionsPart2>().AntiAliasing = RenderOptions.AntiAliasing.FXAA;
         }
 
         //_overlay = new SimpleOverlay();
@@ -81,6 +83,11 @@ public partial class VRRenderEngineComponent : EngineComponent
     [Destructor]
     protected void Destroy()
     {
+        if (_originalResolution != Vector2I.Zero)
+        {
+            _options.GetOrCreatePart<RenderDisplayOptionsPart>().Resolution = _originalResolution;
+        }
+
         _overlay?.Dispose();
         _overlay = null;
 
