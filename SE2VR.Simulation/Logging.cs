@@ -53,7 +53,7 @@ public static class Logging
 
     public static void Log(LogLevel level, string message, params object[] args)
     {
-        string formattedMessage = string.Format(message, args);
+        string formattedMessage = args.Length > 0 ? string.Format(message, args) : message;
         string indent = new string('|', _indent).Replace("|", "|    ");
         string prefix = $"{nameof(SE2VR)} -> {indent}[{level}]: ";
 

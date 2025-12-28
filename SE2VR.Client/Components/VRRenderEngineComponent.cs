@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+﻿using HarmonyLib;
 using Keen.Game2.Client.GameSystems.CameraSystems;
 using Keen.VRage.Core;
 using Keen.VRage.Core.EngineComponents;
@@ -8,6 +8,7 @@ using Keen.VRage.Core.Game.Systems;
 using Keen.VRage.Core.Render;
 using Keen.VRage.DCS.Annotations;
 using Keen.VRage.DCS.Components;
+using Keen.VRage.Library.Definitions;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using Keen.VRage.Render.Options;
@@ -15,6 +16,8 @@ using OpenVRAPI;
 using SE2VR.Client.Patches;
 using SE2VR.Client.Wrappers;
 using SE2VR.Simulation;
+using System.Runtime.InteropServices;
+using System.Text.Json;
 using Valve.VR;
 using Vortice.Direct3D12;
 using Vortice.DXGI;
@@ -84,6 +87,11 @@ public partial class VRRenderEngineComponent : EngineComponent
         //_overlay = new SimpleOverlay();
         GameWindowPatch.OnCursorVisibleChanged += GameWindowPatch_OnCursorVisibleChanged;
         _texturePtr = Marshal.AllocHGlobal(Marshal.SizeOf<D3D12TextureData_t>());
+
+        Logging.Info($"{JsonSerializer.Serialize(OpenVREngineComponent.Instance.System.GetEyeToHeadTransform(EVREye.Eye_Left), new JsonSerializerOptions { WriteIndented = true, IncludeFields = true })}");
+        Logging.Info($"{JsonSerializer.Serialize(OpenVREngineComponent.Instance.System.GetEyeToHeadTransform(EVREye.Eye_Right), new JsonSerializerOptions { WriteIndented = true, IncludeFields = true })}");
+        Logging.Info($"{JsonSerializer.Serialize((Matrix)VRUtils.GetPerspectiveFovRhInfiniteComplementary(EVREye.Eye_Left, DefinitionManager.Instance.GetDefinitionsOfType<CameraDefinition>().FirstOrDefault()?.NearPlane ?? 0.1f), new JsonSerializerOptions { WriteIndented = true, IncludeFields = true })}");
+        Logging.Info($"{JsonSerializer.Serialize((Matrix)VRUtils.GetPerspectiveFovRhInfiniteComplementary(EVREye.Eye_Right, DefinitionManager.Instance.GetDefinitionsOfType<CameraDefinition>().FirstOrDefault()?.NearPlane ?? 0.1f), new JsonSerializerOptions { WriteIndented = true, IncludeFields = true })}");
     }
 
     [Destructor]
@@ -158,15 +166,17 @@ public partial class VRRenderEngineComponent : EngineComponent
             var body = Body.Data.GetWorldTransform();
             body.Position += Vector3D.Transform(_vrOptions.WorldOffset, body.Orientation);
 
-            var head = body * HMD;
             var eyeToHead = VRUtils.ToTransform(OpenVREngineComponent.Instance.System.GetEyeToHeadTransform(_currentPass));
-            eyeToHead.Position *= _vrOptions.GetScale();
+            var eye = HMD * eyeToHead;
+            eye.Position *= _vrOptions.GetScale();
 
-            var wt = body * (HMD * eyeToHead);
+            var head = body * HMD;
+            head.Position *= _vrOptions.GetScale();
 
-            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Green, true, TimeSpan.FromMilliseconds(50));
-            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Blue, true, TimeSpan.FromMilliseconds(50));
-            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(head.Position, head.Position + (head.Orientation.GetForward() / 4), ColorSRGB.Green, true);
+            var wt = body * eye;
+            Body.GetSession<IDebugDraw>().DebugDraw.AddArrow(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Green, null, 0.1, false, TimeSpan.FromMilliseconds(50));
+            Body.GetSession<IDebugDraw>().DebugDraw.AddArrow(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Blue, null, 0.1, false, TimeSpan.FromMilliseconds(50));
+            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(head.Position, head.Position + (head.Orientation.GetForward() / 4), ColorSRGB.Green, false);
 
             if (wt.IsValid() && !GameWindowPatch.CursorVisible)
             {
