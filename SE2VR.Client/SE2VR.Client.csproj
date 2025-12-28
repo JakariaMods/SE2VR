@@ -125,6 +125,10 @@
         <HintPath>..\GameLibs\VRage.Render.dll</HintPath>
         <Private>False</Private>
     </Reference>
+	<Reference Include="VRage.Render12">
+		<HintPath>..\GameLibs\VRage.Render12.dll</HintPath>
+		<Private>False</Private>
+	</Reference>
     <Reference Include="VRage.UI">
         <HintPath>..\GameLibs\VRage.UI.dll</HintPath>
         <Private>False</Private>

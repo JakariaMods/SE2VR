@@ -61,7 +61,7 @@ public partial class VRRenderEngineComponent : EngineComponent
         
         uint width = 0, height = 0;
         OpenVR.System.GetRecommendedRenderTargetSize(ref width, ref height);
-
+        
         _vrOptions = _options.GetOrCreatePart<OpenVROptions>();
 
         if (!_vrOptions.CameraMode)
@@ -71,11 +71,18 @@ public partial class VRRenderEngineComponent : EngineComponent
             _originalResolution = renderOptions.Resolution;
 
             renderOptions.FullScreen = true;
+
+            Logging.Info($"Resizing from {renderOptions.Resolution} to {new Vector2I((int)width, (int)height)}");
             renderOptions.Resolution = new Vector2I((int)width, (int)height);
+
+            _options.GetOrCreatePart<RenderOptionsPart2>().SetResolution(new Vector2I((int)width, (int)height));
+
+            uint x = 0, y = 0, w = 0, h = 0;
+            OpenVR.ExtendedDisplay.GetEyeOutputViewport(EVREye.Eye_Left, ref x, ref y, ref w, ref h);
+            Logging.Info($"{x} {y} {w} {h}");
         }
 
         //_overlay = new SimpleOverlay();
-
         GameWindowPatch.OnCursorVisibleChanged += GameWindowPatch_OnCursorVisibleChanged;
         _texturePtr = Marshal.AllocHGlobal(Marshal.SizeOf<D3D12TextureData_t>());
     }

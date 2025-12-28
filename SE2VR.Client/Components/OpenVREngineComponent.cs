@@ -1,18 +1,20 @@
-﻿using System.Reflection;
-using System.Runtime.InteropServices;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Keen.Game2.Client.RuntimeSystems.CoreScenes;
 using Keen.VRage.Core;
 using Keen.VRage.Core.EngineComponents;
 using Keen.VRage.Core.Game.Systems;
+using Keen.VRage.Core.Platform.CrashReporting;
 using Keen.VRage.Core.Systems;
 using Keen.VRage.DCS.Annotations;
 using Keen.VRage.Library.Diagnostics;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
+using Keen.VRage.Library.Utils;
 using OpenVRAPI;
 using SE2VR.Client.Input;
 using SE2VR.Simulation;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using Valve.VR;
 
 namespace SE2VR.Client.Components;
@@ -71,7 +73,7 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
             throw new Exception($"Failed to initialize {nameof(OpenVR)}");
 
         Logging.Debug("OpenVR booted with code {0}", error);
-
+        
         string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, MANIFEST_FILE);
         Logging.Debug("OpenVR manifest located at '{0}'", path);
         var appError = OpenVR.Applications.AddApplicationManifest(path, true);
@@ -165,8 +167,10 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
                         else
                             LeftHand = VROptions.Rescale(new RelativeTransform(Quaternion.CreateFromYawPitchRoll(VROptions.PlaySpaceRotation, 0, 0)) * VRUtils.ToTransform(matrix));
 
-                        if (LeftHand.HasValue)
+                        if (LeftHand.HasValue && LeftHand.Value.IsValid())
                             LeftHand = LeftHand.Value with { Position = LeftHand.Value.Position + VROptions.WorldOffset };
+                        else
+                            LeftHand = null;
 
                         break;
 
@@ -176,8 +180,10 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
                         else
                             RightHand = VROptions.Rescale(new RelativeTransform(Quaternion.CreateFromYawPitchRoll(VROptions.PlaySpaceRotation, 0, 0)) * VRUtils.ToTransform(matrix));
 
-                        if (RightHand.HasValue)
+                        if (RightHand.HasValue && RightHand.Value.IsValid())
                             RightHand = RightHand.Value with { Position = RightHand.Value.Position + VROptions.WorldOffset };
+                        else
+                            RightHand = null;
 
                         break;
 
