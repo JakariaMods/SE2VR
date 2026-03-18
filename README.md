@@ -8,23 +8,34 @@ https://www.youtube.com/watch?v=IntVsKmTe7k
 https://www.youtube.com/watch?v=CkOQraQ0wsI
 
 Known issues/limitations:
-* Render is limited to 30fps per eye, this is because render commands are submitted at 60hz (RenderCommandBuffer.Commit is in main thread)
+* Render is limited to 30fps per eye, this is because render commands are submitted at 60hz
+* Oculus Quest headset is warped. I don't know, please help me fix it if you have a headset.
 
 # Running/Installation:
 
-**1.** Extract the .zip file to a folder (it doesn't matter where) or compile the project yourself (see further below)
+This project is too early in development for a pre-compiled build.
+
+**1.** Run SetupRepository.bat to create a symlink to the SE2 DLLs
+
+**2.** Open the solution and compile SE2VR in Debug or Release configuration (or run "dotnet build SE2VR.sln" in command prompt)
 
 <img width="774" height="355" alt="image" src="https://github.com/user-attachments/assets/c0a0ab34-2143-4103-901e-e3388262cd73" />
 
-**2.** Add the following launch argument to Space Engineers 2 with the correct path
+**3.** Add the following launch argument to Space Engineers 2 with the correct path
 
 -plugins:"C:/Path/To/SE2VR.dll"
 
 <img width="1041" height="353" alt="image" src="https://github.com/user-attachments/assets/da3382ef-a9d2-4474-88bd-0c372b3cd2e8" />
 
-**3.** Launch Space Engineers 2. Steam VR will open automatically
+**4.** Launch Space Engineers 2. Steam VR will open automatically
 
 **Please note that this plugin does not auto-update, and is likely to break between updates.**
+
+# Supported Headsets
+
+* HTC Vive
+
+* Everything else is untested, please submit pull requests with fixes if it does not work with your headset
 
 # Supported controllers
 
@@ -32,7 +43,7 @@ Known issues/limitations:
 
 * HTC Vive (Mapped, not recommended due to missing buttons)
 
-* Everything else is untested, feel free to create mappings for your controllers and submit a pull request
+* Everything else is untested, please submit pull requests with mappings if you want
 
 # How to play
 
@@ -40,15 +51,7 @@ Known issues/limitations:
 
 * UI interaction is currently done using the VR dashboard. Whenever mouse input is accepted, the VR dashboard will automatically open, where you can use your VR hand to drag and click on the projected screen.
 
-* To close the in-game UI, close the dashboard. If the UI does not automatically close, report it with STR.
-
-# Steps to compile the project yourself:
-
-**1.** Download [.NET 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
-
-**2.** Run SetupRepository.bat to create a symlink to the SE2 DLLs
-
-**3.** Open the solution and compile SE2VR in Release configuration (or run "dotnet build SE2VR.sln" in command prompt)
+* To close the in-game UI, close the dashboard. If the UI does not automatically close, report it with repeatable STR, logs, etc.
 
 # Frequently Asked Questions
 
