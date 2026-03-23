@@ -1,5 +1,7 @@
-﻿using HarmonyLib;
+﻿using Avalonia.Controls;
+using HarmonyLib;
 using Keen.Game2.Client.GameSystems.CameraSystems;
+using Keen.VRage.Animation.Resources;
 using Keen.VRage.Core;
 using Keen.VRage.Core.EngineComponents;
 using Keen.VRage.Core.Game.Components;
@@ -8,6 +10,7 @@ using Keen.VRage.Core.Game.Systems;
 using Keen.VRage.Core.Render;
 using Keen.VRage.DCS.Annotations;
 using Keen.VRage.DCS.Components;
+using Keen.VRage.DCS.Utils;
 using Keen.VRage.Library.Definitions;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
@@ -63,7 +66,7 @@ public partial class VRRenderEngineComponent : EngineComponent
         
         uint width = 0, height = 0;
         OpenVR.System.GetRecommendedRenderTargetSize(ref width, ref height);
-        
+
         _vrOptions = _options.GetOrCreatePart<OpenVROptions>();
 
         if (!_vrOptions.CameraMode)
@@ -78,10 +81,6 @@ public partial class VRRenderEngineComponent : EngineComponent
             renderOptions.Resolution = new Vector2I((int)width, (int)height);
 
             _options.GetOrCreatePart<RenderOptionsPart2>().SetResolution(new Vector2I((int)width, (int)height));
-
-            uint x = 0, y = 0, w = 0, h = 0;
-            OpenVR.ExtendedDisplay.GetEyeOutputViewport(EVREye.Eye_Left, ref x, ref y, ref w, ref h);
-            Logging.Info($"{x} {y} {w} {h}");
         }
 
         //_overlay = new SimpleOverlay();
@@ -167,16 +166,11 @@ public partial class VRRenderEngineComponent : EngineComponent
             body.Position += Vector3D.Transform(_vrOptions.WorldOffset, body.Orientation);
 
             var eyeToHead = VRUtils.ToTransform(OpenVREngineComponent.Instance.System.GetEyeToHeadTransform(_currentPass));
+
             var eye = HMD * eyeToHead;
             eye.Position *= _vrOptions.GetScale();
 
-            var head = body * HMD;
-            head.Position *= _vrOptions.GetScale();
-
             var wt = body * eye;
-            Body.GetSession<IDebugDraw>().DebugDraw.AddArrow(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Green, null, 0.1, false, TimeSpan.FromMilliseconds(50));
-            Body.GetSession<IDebugDraw>().DebugDraw.AddArrow(wt.Position, wt.Position + wt.Orientation.GetForward(), _currentPass == EVREye.Eye_Left ? ColorSRGB.Red : ColorSRGB.Blue, null, 0.1, false, TimeSpan.FromMilliseconds(50));
-            Body.GetSession<IDebugDraw>().DebugDraw.AddLine(head.Position, head.Position + (head.Orientation.GetForward() / 4), ColorSRGB.Green, false);
 
             if (wt.IsValid() && !GameWindowPatch.CursorVisible)
             {

@@ -20,16 +20,31 @@ public static class VRUtils
     /// </summary>
     public static RelativeTransform ToTransform(HmdMatrix34_t matrix)
     {
-        Vector3 position = new(matrix.m3, matrix.m7, matrix.m11);
+        return (RelativeTransform)ToMatrix(matrix);
+    }
 
-        Quaternion rotation = new();
-        rotation.W = MathF.Sqrt(1.0f + matrix.m0 + matrix.m5 + matrix.m10) / 2.0f;
-        rotation.X = ((matrix.m9 - matrix.m6) / (4 * rotation.W));
-        rotation.Y = ((matrix.m2 - matrix.m8) / (4 * rotation.W));
-        rotation.Z = (matrix.m4 - matrix.m1) / (4 * rotation.W);
-        rotation.Normalize();
+    /// <summary>
+    ///From https://github.com/Math0424/SpaceEngineersVR
+    /// </summary>
+    public static Matrix ToMatrix(this HmdMatrix34_t hmd)
+    {
+        return new Matrix(
+            hmd.m0, hmd.m4, hmd.m8, 0f,
+            hmd.m1, hmd.m5, hmd.m9, 0f,
+            hmd.m2, hmd.m6, hmd.m10, 0f,
+            hmd.m3, hmd.m7, hmd.m11, 1f);
+    }
 
-        return new RelativeTransform(position, rotation);
+    /// <summary>
+    ///From https://github.com/Math0424/SpaceEngineersVR
+    /// </summary>
+    public static Matrix ToMatrix(this HmdMatrix44_t hmd)
+    {
+        return new Matrix(
+            hmd.m0, hmd.m4, hmd.m8, hmd.m12,
+            hmd.m1, hmd.m5, hmd.m9, hmd.m13,
+            hmd.m2, hmd.m6, hmd.m10, hmd.m14,
+            hmd.m3, hmd.m7, hmd.m11, hmd.m15);
     }
 
     /// <summary>
@@ -51,7 +66,7 @@ public static class VRUtils
         return new MatrixD(
             2d * idx, 0d, 0d, 0d,
             0d, 2d * idy, 0d, 0d,
-            sx * idx, sy * idy, 0d, -1d,
+            -sx * idx, -sy * idy, 0d, -1d,
             0d, 0d, nearPlane, 0d);
     }
 

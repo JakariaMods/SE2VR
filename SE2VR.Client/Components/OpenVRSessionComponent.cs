@@ -351,7 +351,7 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
                 if (_settings.ShowBoots)
                 {
                     var hiddenparts = changes.HiddenParts.ToList();
-                    hiddenparts.Remove("BootsProps");
+                    hiddenparts.Remove("MiroslavSokol_BootsProps");
                     changes.HiddenParts = new MergeableList<StringId>(hiddenparts.Count);
                     foreach (var part in hiddenparts)
                     {

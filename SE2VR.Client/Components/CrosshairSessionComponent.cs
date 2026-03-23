@@ -63,7 +63,7 @@ public partial class CrosshairSessionComponent : SessionComponent, IInSceneListe
     [UpdateCrosshairJob]
     private void UpdateCrosshair()
     {
-        if (_openvr.InteractorEntity is null)
+        /*if (_openvr.InteractorEntity is null)
             return;
 
         var wt = _openvr.InteractorEntity.Data.GetWorldTransform();
@@ -102,6 +102,6 @@ public partial class CrosshairSessionComponent : SessionComponent, IInSceneListe
         else
         {
             _model.SetEntityCustomData(new PaintPreviewMeshData(default, ColorSRGB.Yellow));
-        }
+        }*/
     }
 }
