@@ -1,4 +1,4 @@
-<img alt="Image of the Space Engineers 2 Astronaut wearing a Valve Index" src="https://github.com/user-attachments/assets/4fff1b19-1673-4456-91a8-e5a144050720" />
+<img alt="Edited image of the Space Engineers 2 Astronaut wearing a Valve Index" src="https://github.com/user-attachments/assets/4fff1b19-1673-4456-91a8-e5a144050720" />
 
 # SE2VR Plugin (VS2.2.0.1972+)
 This is a plugin that adds [OpenVR](https://github.com/ValveSoftware/openvr) support to [Space Engineers 2](https://store.steampowered.com/app/1133870/Space_Engineers_2/). This project aims to make the Space Engineers 2 survival experience playable from start to finish in VR.
@@ -13,7 +13,7 @@ Known issues/limitations:
 
 # Running/Installation:
 
-This project is too early in development for a pre-compiled build.
+This project is too early in development for a pre-compiled build. If you can't compile it, please don't use it.
 
 **1.** Run SetupRepository.bat to create a symlink to the SE2 DLLs
 
