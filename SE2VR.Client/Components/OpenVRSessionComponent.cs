@@ -55,7 +55,7 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
     private readonly IEntitySpawner _spawner;
 
     [Service]
-    private IOptions _options;
+    private readonly IOptions _options;
 
     [Service]
     private readonly ClientPlayersSessionComponent _players;

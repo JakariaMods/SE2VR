@@ -44,8 +44,6 @@ public class Plugin : IPlugin
 
     private void Plugins_OnBeforeEngineInstantiated(EngineBuilder engineBuilder)
     {
-        GameFeatureConfig.EquipDelays = false;
-
         if (_hmd)
         {
             engineBuilder.EntityBuilder.WithComponent<OpenVREngineComponent>();

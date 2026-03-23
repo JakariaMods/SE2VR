@@ -1,18 +1,19 @@
 ﻿using HarmonyLib;
 using Keen.Game2.Client.UI.HUD.Reticle;
+using Keen.Game2.Client.UI.InGame;
+using Keen.VRage.Library.Utils;
 
 namespace SE2VR.Client.Patches;
 
 /// <summary>
 /// Harmony patch for disabling the flatscreen crosshair/reticle
 /// </summary>
-[HarmonyPatch(typeof(ReticleScreenViewModel), nameof(ReticleScreenViewModel.ReticleWidth), MethodType.Getter)]
-public class ReticleScreenViewModelPatch
+[HarmonyPatch(typeof(SessionInGameUISessionComponent), "CreateReticleScreen")]
+public class SessionInGameUISessionComponentPatch
 {
-    [HarmonyPrefix]
-    private static bool Prefix(ref float __result)
+    public static bool Prefix(ref IObservableDisposable __result)
     {
-        __result = 0;
+        __result = null!;
         return false;
     }
 }
