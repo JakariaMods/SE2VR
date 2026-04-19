@@ -64,7 +64,7 @@ Raytracing/TAA does not behave well with this implementation of VR (It introduce
 
 **3.** Why is the frame rate low?
 
-The implementation of VR used results in half of the frames being allocated to the left eye, and the other half to the right. This effectively halves the framerate.
+The implementation of VR is limited to 60fps.
 
 # Settings/Options
 
