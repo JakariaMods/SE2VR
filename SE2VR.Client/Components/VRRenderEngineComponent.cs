@@ -32,6 +32,11 @@ namespace SE2VR.Client.Components;
 /// </summary>
 public partial class VRRenderEngineComponent : EngineComponent
 {
+    /// <summary>
+    /// When true, the game will render both left and right eye views in the same frame, allowing for 60fps instead of 30 :)
+    /// </summary>
+    public const bool DOUBLE_RENDER = true;
+
     public CameraComponent? Camera;
     public Entity? Body;
     public RelativeTransform HMD = RelativeTransform.Identity;
