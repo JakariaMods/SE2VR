@@ -8,7 +8,6 @@ https://www.youtube.com/watch?v=IntVsKmTe7k
 https://www.youtube.com/watch?v=CkOQraQ0wsI
 
 Known issues/limitations:
-* Render is limited to 30fps per eye, this is because render commands are submitted at 60hz
 * Oculus Quest headset is warped. I don't know, please help me fix it if you have a headset.
 
 # Running/Installation:
