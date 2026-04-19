@@ -30,7 +30,7 @@ namespace SE2VR.Client.Components;
 /// <summary>
 /// Manage the rendering of the HMD
 /// </summary>
-public partial class VRRenderEngineComponent : EngineComponent
+public partial class VRRenderEngineComponent : EngineComponent, IInSceneListener
 {
     /// <summary>
     /// When true, the game will render both left and right eye views in the same frame, allowing for 60fps instead of 30 :)
@@ -101,15 +101,15 @@ public partial class VRRenderEngineComponent : EngineComponent
     [Destructor]
     protected void Destroy()
     {
-        if (_originalResolution != Vector2I.Zero)
-        {
-            _options.GetOrCreatePart<RenderDisplayOptionsPart>().Resolution = _originalResolution;
-        }
-
         _overlay?.Dispose();
         _overlay = null;
 
         Marshal.FreeHGlobal(_texturePtr);
+    }
+
+    void IInSceneListener.OnBeforeRemovedFromScene()
+    {
+        _options.GetOrCreatePart<RenderDisplayOptionsPart>().Resolution = _originalResolution;
     }
 
     private void GameWindowPatch_OnCursorVisibleChanged(bool visible)
