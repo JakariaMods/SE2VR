@@ -116,7 +116,7 @@ public partial class VRRenderEngineComponent : EngineComponent, IInSceneListener
     {
         if (visible)
         {
-            OpenVR.Overlay?.ShowDashboard("system.desktop.1");
+            OpenVR.Overlay?.ShowDashboard(_vrOptions.DashboardWindow);
         }
         else
         {

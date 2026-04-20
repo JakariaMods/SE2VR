@@ -66,6 +66,12 @@ public partial class OpenVROptions : ObservableObject, IOptionsPart
     [Notify]
     private bool _haptics = true;
 
+    /// <summary>
+    /// The name of the dashboard to open when the player opens any window. (Should be the one that the game is displayed in)
+    /// </summary>
+    [Notify]
+    private string _dashboardWindow = "system.desktop.1";
+
     public void ForceSerialization()
     {
         OnPropertyChanged();
