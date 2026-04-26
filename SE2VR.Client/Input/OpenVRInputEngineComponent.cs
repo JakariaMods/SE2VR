@@ -98,17 +98,21 @@ public partial class OpenVRInputEngineComponent : Component
         ], null);
 
         //Primary Joystick Look
-        AddMapping("/actions/default", "/actions/default/in/Look", new PointerInput(_vrOptions, invertY: true),
+        AddMapping("/actions/default", "/actions/default/in/Look", new AnalogInput(1, positiveOnly: true),
         [
-            new Guid("e886f672-5656-4d23-a4ba-77a14bb702be"),
-            //new Guid("45dcca79-8b8b-461d-b72f-6967c44b2683"), //This is third person freelook
-            new Guid("daeab155-fd20-45c7-80c1-fa404e0b1259"),
+            new Guid("f8517b34-838c-45bb-b3ee-4631b7ddcba4"), //LookUp
         ], null);
-
-        //Primary Joystick Look for ships
-        AddMapping("/actions/default", "/actions/default/in/Look", new PointerInput(_vrOptions, 0.25f, invertY: true),
+        AddMapping("/actions/default", "/actions/default/in/Look", new AnalogInput(1, invert: true, positiveOnly: true),
         [
-            new Guid("48673d6a-7d82-4f4e-9c96-9e64ab1c1d68"),
+            new Guid("6b9d6675-0c44-47a6-9c44-2fbe8e52397d"), //LookDown
+        ], null);
+        AddMapping("/actions/default", "/actions/default/in/Look", new AnalogInput(0, invert: true, positiveOnly: true),
+        [
+            new Guid("9c78f323-ff0e-48ba-8e8c-b541d9094f42"), //LookLeft
+        ], null);
+        AddMapping("/actions/default", "/actions/default/in/Look", new AnalogInput(0, positiveOnly: true),
+        [
+            new Guid("2326e7e3-eafc-4072-b99b-c1749c278dea"), //LookRight
         ], null);
 
         //Secondary Joystick Forward/Backward movement

@@ -17,10 +17,16 @@ public readonly struct AnalogInput : IInputType
     /// </summary>
     public readonly int Component;
 
-    public AnalogInput(int component, bool invert = false)
+    /// <summary>
+    /// When true, negative values are ignored
+    /// </summary>
+    public readonly bool PositiveOnly;
+
+    public AnalogInput(int component, bool invert = false, bool positiveOnly = false)
     {
         Component = component;
         Invert = invert;
+        PositiveOnly = positiveOnly;
     }
 
     public (object Value, bool Changed, bool Active) GetValue(ulong input)
@@ -54,6 +60,10 @@ public readonly struct AnalogInput : IInputType
                 throw new Exception($"Unexpected component {Component}");
         }
 
-        return (value * (Invert ? -1 : 1), delta != 0, value != 0);
+        float signed = value * (Invert ? -1 : 1);
+        if (PositiveOnly && signed < 0)
+            signed = 0;
+
+        return (signed, delta != 0, signed != 0);
     }
 }
