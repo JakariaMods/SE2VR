@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Keen.Game2.Client.GameSystems.BlockPlacement;
+using Keen.Game2.Client.GameSystems.BlockPlacement.BlockPlacer;
 using Keen.Game2.Client.GameSystems.CameraSystems;
 using Keen.Game2.Client.GameSystems.CameraSystems.Helpers;
 using Keen.Game2.Client.GameSystems.CameraSystems.Modes;
@@ -9,7 +10,6 @@ using Keen.Game2.Client.GameSystems.UI3D;
 using Keen.Game2.Client.WorldObjects.Character;
 using Keen.Game2.Client.WorldObjects.Spectators;
 using Keen.Game2.Client.WorldObjects.Tools;
-using Keen.Game2.Game.EntityComponents.Toolbar.BlockPlacer;
 using Keen.Game2.Simulation.WorldObjects.Characters;
 using Keen.Game2.Simulation.WorldObjects.Movement;
 using Keen.Game2.Simulation.WorldObjects.Shared;

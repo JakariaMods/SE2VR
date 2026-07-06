@@ -1,8 +1,6 @@
-﻿using Keen.Game2.Game.Plugins;
-using Keen.Game2.Simulation;
-using Keen.VRage.Core.EngineComponents;
+﻿using Keen.VRage.Core.EngineComponents;
+using Keen.VRage.Core.Plugins;
 using Keen.VRage.Render.EngineComponents;
-using SE2VR.Client;
 using SE2VR.Client.Components;
 using SE2VR.Client.Input;
 using SE2VR.Simulation;
@@ -16,7 +14,7 @@ namespace SE2VR;
 public class Plugin : IPlugin
 {
     private readonly bool _hmd = true;
-
+    
     public Plugin(PluginHost plugins)
     {
         plugins.OnBeforeEngineInstantiated += Plugins_OnBeforeEngineInstantiated;
