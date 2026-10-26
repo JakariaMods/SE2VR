@@ -258,7 +258,9 @@ public partial class VRRenderEngineComponent : EngineComponent
             texture?.Dispose();
 
             //Final texture
+            DXGIFormatExtPatch.ForceFormat = true;
             texture = MyTexture.CreateRWResizableRenderTargetTexture(EnumInfo<EVREye>.GetName(eye), Format.R8G8B8A8_UNorm_SRgb, res, Format.R8G8B8A8_UNorm, 1, null, null);
+            DXGIFormatExtPatch.ForceFormat = false;
             _eyeTextures[eye] = texture;
         }
 
