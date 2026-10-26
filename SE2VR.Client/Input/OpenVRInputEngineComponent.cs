@@ -62,6 +62,9 @@ public partial class OpenVRInputEngineComponent : Component
     private ulong _leftSkeletonAction;
     private ulong _rightSkeletonAction;
 
+    private ulong _leftGrabAction;
+    private ulong _rightGrabAction;
+
     /// <summary>
     /// 0-1 curl of each finger. 0 is extended, 1 is fully closed
     /// </summary>
@@ -71,6 +74,16 @@ public partial class OpenVRInputEngineComponent : Component
     /// <inheritdoc cref="LeftFingers"/>
     /// </summary>
     public readonly Dictionary<Finger, float> RightFingers = new();
+
+    /// <summary>
+    /// The left hand's grab (grip) is held
+    /// </summary>
+    public bool LeftGrab { get; private set; }
+
+    /// <summary>
+    /// The right hand's grab (grip) is held
+    /// </summary>
+    public bool RightGrab { get; private set; }
 
     [Init]
     protected void Init()
@@ -92,6 +105,12 @@ public partial class OpenVRInputEngineComponent : Component
 
         if (OpenVR.Input.GetActionHandle("/actions/default/in/SkeletonRightHand", ref _rightSkeletonAction) != EVRInputError.None)
             throw new Exception("Couldn't bind right hand skeleton");
+
+        if (OpenVR.Input.GetActionHandle("/actions/default/in/GrabLeft", ref _leftGrabAction) != EVRInputError.None)
+            throw new Exception("Couldn't bind left hand grab");
+
+        if (OpenVR.Input.GetActionHandle("/actions/default/in/GrabRight", ref _rightGrabAction) != EVRInputError.None)
+            throw new Exception("Couldn't bind right hand grab");
 
         AddMapping("/actions/default", "/actions/default/in/InteractPrimary", new DigitalInput(),
         [
@@ -292,6 +311,9 @@ public partial class OpenVRInputEngineComponent : Component
 
         UpdateFingers(_leftSkeletonAction, LeftFingers);
         UpdateFingers(_rightSkeletonAction, RightFingers);
+
+        LeftGrab = new DigitalInput().GetValue(_leftGrabAction).Active;
+        RightGrab = new DigitalInput().GetValue(_rightGrabAction).Active;
 
         foreach (var set in ActionSets.Values)
         {

@@ -74,7 +74,7 @@ public partial class VRArmsSessionComponent : SessionComponent
             ResolveArmBones(skeleton, _config.RightHand, sign: -1, out _rightWrist, out _rightElbowPart1, out _rightElbow, out _rightFingerJoints);
         }
 
-        if (_vr.LeftHand is { } left)
+        if ((_vrSession.LeftHandOverride ?? _vr.LeftHand) is { } left)
         {
             PoseArm(ref pose, _leftWrist, _leftElbowPart1, _leftElbow, left * _config.LeftHand.WristOffset);
             PoseFingers(ref pose, _leftFingerJoints, _input.LeftFingers);

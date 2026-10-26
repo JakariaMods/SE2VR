@@ -7,7 +7,7 @@
     <Platforms>x64</Platforms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <VRageBundleName>$(AssemblyName)</VRageBundleName>
-	<VRageBundleVersion>1.1.1.1</VRageBundleVersion>
+	<VRageBundleVersion>1.1.2.1</VRageBundleVersion>
 	<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 </PropertyGroup>
 

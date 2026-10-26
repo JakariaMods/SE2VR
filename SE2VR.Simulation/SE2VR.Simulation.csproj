@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 	<Platforms>x64</Platforms>
 	  <VRageBundleName>$(AssemblyName)</VRageBundleName>
-	  <VRageBundleVersion>1.1.1.1</VRageBundleVersion>
+	  <VRageBundleVersion>1.1.2.1</VRageBundleVersion>
 	<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

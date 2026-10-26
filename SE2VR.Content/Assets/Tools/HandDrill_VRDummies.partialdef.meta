@@ -1,11 +1,11 @@
 {
   "$Bundles": {
-    "Game2": "4.0.0.3151",
-    "SE2VR": "1.1.1.1",
-    "SE2VR.Client": "1.1.1.1",
-    "SE2VR.Simulation": "1.1.1.1",
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
     "System.Runtime": "1.0.0.0",
-    "VRage": "4.0.0.3151"
+    "VRage": "4.0.0.3165"
   },
   "$Type": "VRage:Keen.VRage.ContentPipeline.Metafiles.MetaData",
   "$Value": {
@@ -13,7 +13,7 @@
     "InternalItems": [
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Structure.FileInfoMetaDataItem",
-        "FileHash": "eYUIjrT9szLD5/axx2PuXg=="
+        "FileHash": "5gRfTqrxLQICRIE0sTd6/w=="
       },
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Features.AssetProcessing.AssetProcessingMetaDataItem",
@@ -23,14 +23,14 @@
         },
         "ContentFiles": {
           "MainOutput": {
-            "FileHash": "VTW+UTSZFugDEQDODHwWcg==",
+            "FileHash": "wKU32sQHFYyqnYzSRINmfQ==",
             "FileName": "HandDrill_VRDummies.def"
           },
           "AdditionalOutputs": []
         },
         "Problems": [],
         "DependenciesHashes": [],
-        "AssetHash": "eYUIjrT9szLD5/axx2PuXg==",
+        "AssetHash": "5gRfTqrxLQICRIE0sTd6/w==",
         "OverrideDetachedState": false,
         "IgnoredErrors": "None"
       }

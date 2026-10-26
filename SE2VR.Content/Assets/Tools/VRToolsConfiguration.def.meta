@@ -1,11 +1,11 @@
 {
   "$Bundles": {
-    "Game2": "4.0.0.3151",
-    "SE2VR": "1.1.1.1",
-    "SE2VR.Client": "1.1.1.1",
-    "SE2VR.Simulation": "1.1.1.1",
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
     "System.Runtime": "1.0.0.0",
-    "VRage": "4.0.0.3151"
+    "VRage": "4.0.0.3165"
   },
   "$Type": "VRage:Keen.VRage.ContentPipeline.Metafiles.MetaData",
   "$Value": {
@@ -13,7 +13,7 @@
     "InternalItems": [
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Structure.FileInfoMetaDataItem",
-        "FileHash": "4DVFOH+X15yZTIxC6Rfb1w=="
+        "FileHash": "GuPDFxAWp65q509zLDUftw=="
       },
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Features.AssetProcessing.AssetProcessingMetaDataItem",
@@ -23,14 +23,14 @@
         },
         "ContentFiles": {
           "MainOutput": {
-            "FileHash": "eBLoJ5VcFoWrGZOCfRxnmg==",
+            "FileHash": "8BxJQbumpkG7F2g+NNF/Ag==",
             "FileName": "VRToolsConfiguration.def"
           },
           "AdditionalOutputs": []
         },
         "Problems": [],
         "DependenciesHashes": [],
-        "AssetHash": "4DVFOH+X15yZTIxC6Rfb1w==",
+        "AssetHash": "GuPDFxAWp65q509zLDUftw==",
         "OverrideDetachedState": false,
         "IgnoredErrors": "None"
       }

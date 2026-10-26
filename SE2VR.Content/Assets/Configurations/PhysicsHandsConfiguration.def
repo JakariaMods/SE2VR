@@ -1,0 +1,22 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3165"
+  },
+  "$Type": "SE2VR.Simulation:SE2VR.Simulation.Configurations.PhysicsHandsConfigurationObjectBuilder",
+  "$Value": {
+    "Guid": "63c4a2e2-be1f-457b-bea8-d29ebaaf0c36",
+    "HandMass": 2,
+    "MaxLinearSpeed": 20,
+    "MaxAngularSpeed": 30,
+    "GrabRadius": 0.1,
+    "GrabStrength": 5,
+    "MaxGrabDistance": 0.5,
+    "ToolGripDummy": "b7069463-1012-4a28-af7d-cf9f08e932c0",
+    "ToolEquipDistance": 0.15
+  }
+}

@@ -1,18 +1,39 @@
 {
   "$Bundles": {
-    "Game2": "4.0.0.3151",
-    "SE2VR": "1.1.1.1",
-    "SE2VR.Client": "1.1.1.1",
-    "SE2VR.Simulation": "1.1.1.1",
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
     "System.Runtime": "1.0.0.0",
-    "VRage": "4.0.0.3151"
+    "VRage": "4.0.0.3165"
   },
   "$Type": "SE2VR.Client:SE2VR.Client.Configurations.VRToolsConfigurationObjectBuilder",
   "$Value": {
     "Guid": "644a3202-dd7d-4541-a23e-a3b058c8e7b8",
     "BarrelDummy": "64a7d585-9aed-4376-9483-9eb42d24c28d",
     "HandDummy": "b7069463-1012-4a28-af7d-cf9f08e932c0",
-    "ControllerGrip": {
+    "SecondaryGripDummy": "4df8cfdb-c414-4f47-8ee9-51dc283a4313",
+    "LeftControllerGrip": {
+      "Transform": {
+        "Position": {
+          "X": -0.0039,
+          "Y": 0.0037,
+          "Z": 0.0759
+        },
+        "Orientation": {
+          "X": -0.2908,
+          "Y": 0,
+          "Z": 0,
+          "W": 0.9568
+        }
+      },
+      "EulerHint": {
+        "X": -33.81,
+        "Y": 0,
+        "Z": 0
+      }
+    },
+    "RightControllerGrip": {
       "Transform": {
         "Position": {
           "X": 0.0039,

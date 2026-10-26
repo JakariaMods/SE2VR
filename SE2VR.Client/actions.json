@@ -24,6 +24,14 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/GrabLeft",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/GrabRight",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/in/Move",
       "type": "vector2"
     },
@@ -143,6 +151,8 @@
       "/actions/default/in/SkeletonRightHand": "Right Hand Skeleton",
       "/actions/default/in/InteractPrimary": "Interact Primary (Tool Primary, Place Block, UI, etc)",
       "/actions/default/in/InteractSecondary": "Interact Secondary (Tool Secondary)",
+      "/actions/default/in/GrabLeft": "Grab Left (Grab objects, support two-handed tools)",
+      "/actions/default/in/GrabRight": "Grab Right (Grab objects)",
       "/actions/default/in/Move": "Move",
       "/actions/default/in/Look": "Look",
       "/actions/default/in/MoveUp": "Move Up (Jump)",

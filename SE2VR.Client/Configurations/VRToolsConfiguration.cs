@@ -20,9 +20,19 @@ public partial class VRToolsConfiguration : Configuration
     public DummyTypeDefinition HandDummy { get; private set; }
 
     /// <summary>
-    /// Grip of the hand relative to the tracked (raw) controller pose, that <see cref="HandDummy"/> is aligned with
+    /// Dummy that defines a secondary grip for two-handed tools
     /// </summary>
-    public RelativeTransformWithEulerHint ControllerGrip { get; private set; } = RelativeTransformWithEulerHint.Identity;
+    public DummyTypeDefinition? SecondaryGripDummy { get; private set; }
+
+    /// <summary>
+    /// Grip of the left hand relative to the tracked (raw) controller pose, that <see cref="SecondaryGripDummy"/> is aligned with
+    /// </summary>
+    public RelativeTransformWithEulerHint LeftControllerGrip { get; private set; } = RelativeTransformWithEulerHint.Identity;
+
+    /// <summary>
+    /// Grip of the right hand relative to the tracked (raw) controller pose, that <see cref="HandDummy"/> is aligned with
+    /// </summary>
+    public RelativeTransformWithEulerHint RightControllerGrip { get; private set; } = RelativeTransformWithEulerHint.Identity;
 
     /// <summary>
     /// Interaction origin relative to the controller origin, used when the held tool has no <see cref="BarrelDummy"/>

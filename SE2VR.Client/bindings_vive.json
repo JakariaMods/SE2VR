@@ -86,6 +86,16 @@
             },
             {
                "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/GrabRight"
+                  }
+               },
+               "mode" : "button",
+               "parameters" : {},
+               "path" : "/user/hand/right/input/grip"
+            },
+            {
+               "inputs" : {
                   "position" : {
                      "output" : "/actions/default/in/move"
                   }

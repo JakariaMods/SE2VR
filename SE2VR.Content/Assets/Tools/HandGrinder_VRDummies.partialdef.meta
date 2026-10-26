@@ -1,11 +1,11 @@
 {
   "$Bundles": {
-    "Game2": "4.0.0.3151",
-    "SE2VR": "1.1.1.1",
-    "SE2VR.Client": "1.1.1.1",
-    "SE2VR.Simulation": "1.1.1.1",
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
     "System.Runtime": "1.0.0.0",
-    "VRage": "4.0.0.3151"
+    "VRage": "4.0.0.3165"
   },
   "$Type": "VRage:Keen.VRage.ContentPipeline.Metafiles.MetaData",
   "$Value": {
@@ -13,7 +13,7 @@
     "InternalItems": [
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Structure.FileInfoMetaDataItem",
-        "FileHash": "eZYl8s2ojP/XOMXD6u718w=="
+        "FileHash": "LSLzTc4FZjGbmgYteruDog=="
       },
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Features.AssetProcessing.AssetProcessingMetaDataItem",
@@ -23,14 +23,14 @@
         },
         "ContentFiles": {
           "MainOutput": {
-            "FileHash": "G4++UIX0zEgPcEJRGKq4MA==",
+            "FileHash": "Y0sny8uKyH//pS/Y65DvEQ==",
             "FileName": "HandGrinder_VRDummies.def"
           },
           "AdditionalOutputs": []
         },
         "Problems": [],
         "DependenciesHashes": [],
-        "AssetHash": "eZYl8s2ojP/XOMXD6u718w==",
+        "AssetHash": "LSLzTc4FZjGbmgYteruDog==",
         "OverrideDetachedState": false,
         "IgnoredErrors": "None"
       }

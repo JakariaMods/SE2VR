@@ -7,7 +7,7 @@
 	<Platforms>x64</Platforms>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<VRageBundleName>$(AssemblyName)</VRageBundleName>
-	<VRageBundleVersion>1.1.1.1</VRageBundleVersion>
+	<VRageBundleVersion>1.1.2.1</VRageBundleVersion>
 	<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
@@ -107,6 +107,10 @@
     </Reference>
     <Reference Include="VRage.Library">
         <HintPath>..\GameLibs\VRage.Library.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
+    <Reference Include="VRage.Multiplayer">
+        <HintPath>..\GameLibs\VRage.Multiplayer.dll</HintPath>
         <Private>False</Private>
     </Reference>
     <Reference Include="VRage.Physics">

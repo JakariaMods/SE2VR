@@ -10,7 +10,8 @@
       "$DeltaEncoded": true,
       "Keys": [
         "0ee6d6ba-7c74-4875-bfdf-3ace11f6aa02",
-        "98360303-185e-491f-9c26-9faf75903151"
+        "98360303-185e-491f-9c26-9faf75903151",
+        "6d174cd7-3683-490b-bddc-bb061491e2cc"
       ],
       "Changed": [
         {
@@ -79,6 +80,41 @@
               "Z": 1
             },
             "Type": "b7069463-1012-4a28-af7d-cf9f08e932c0",
+            "SupportingFracture": null,
+            "HighlightSection": null
+          }
+        },
+        {
+          "Kind": "Insert",
+          "Index": 2,
+          "Value": {
+            "Name": "VRSupportHand",
+            "Transform": {
+              "Transform": {
+                "Position": {
+                  "X": 0.28,
+                  "Y": 0,
+                  "Z": 0.005
+                },
+                "Orientation": {
+                  "X": -0.5,
+                  "Y": -0.5,
+                  "Z": 0.5,
+                  "W": 0.5
+                }
+              },
+              "EulerHint": {
+                "X": 0,
+                "Y": -90,
+                "Z": 90
+              }
+            },
+            "Scale": {
+              "X": 1,
+              "Y": 1,
+              "Z": 1
+            },
+            "Type": "4df8cfdb-c414-4f47-8ee9-51dc283a4313",
             "SupportingFracture": null,
             "HighlightSection": null
           }

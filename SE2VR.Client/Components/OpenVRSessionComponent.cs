@@ -30,8 +30,10 @@ using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using Keen.VRage.Render.Options;
 using SE2VR.Client.Configurations;
+using SE2VR.Client.Input;
 using SE2VR.Client.Patches;
 using SE2VR.Simulation;
+using SE2VR.Simulation.Configurations;
 
 namespace SE2VR.Client.Components;
 
@@ -60,11 +62,26 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
     [Configuration]
     private readonly VRToolsConfiguration _tools;
 
+    [Configuration]
+    private readonly PhysicsHandsConfiguration _physicsHands;
+
     public WeakEntityReference ControlledEntity = new();
     public Entity? InteractorEntity;
 
     private Entity? _heldTool;
     private RelativeTransform _heldToolTransform;
+
+    /// <summary>
+    /// The left hand is supporting the tool held by the right hand
+    /// </summary>
+    public bool TwoHanded { get; private set; }
+
+    /// <summary>
+    /// Controller pose the left hand is snapped to while <see cref="TwoHanded"/>
+    /// </summary>
+    public RelativeTransform? LeftHandOverride { get; private set; }
+
+    private bool _leftGrabHeld;
 
     private OpenVREngineComponent _vr;
     private OpenVROptions _settings;
@@ -180,6 +197,14 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
         ControlledEntity.Entity!.Data.TryRemove<LookOffsetData>();
         _heldTool = null;
 
+        bool wasTwoHanded = TwoHanded;
+        TwoHanded = false;
+        LeftHandOverride = null;
+
+        bool leftGrab = OpenVRInputEngineComponent.Instance.LeftGrab;
+        bool leftGrabPressed = leftGrab && !_leftGrabHeld;
+        _leftGrabHeld = leftGrab;
+
         if (InteractorEntity != null && (rightHand.HasValue || head.HasValue))
         {
             RelativeTransform interactionRt;
@@ -194,7 +219,29 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
 
                     if (model.TryGetDummy(_tools.HandDummy) is { } hand)
                     {
-                        toolRt = right * _tools.ControllerGrip * RelativeTransform.Inverse(hand.Transform);
+                        toolRt = right * _tools.RightControllerGrip * RelativeTransform.Inverse(hand.Transform);
+
+                        if (leftGrab && _vr.LeftHand is { } left && _tools.SecondaryGripDummy is { } supportType && model.TryGetDummy(supportType) is { } support)
+                        {
+                            RelativeTransform leftGrip = _tools.LeftControllerGrip;
+                            var supportPosition = (toolRt * support.Transform).Position;
+                            var leftGripPosition = (left * leftGrip).Position;
+
+                            if (wasTwoHanded || (leftGrabPressed && Vector3.Distance(leftGripPosition, supportPosition) <= _physicsHands.GrabRadius))
+                            {
+                                var pivot = (toolRt * hand.Transform).Position;
+                                var swing = Quaternion.CreateFromTwoVectors(supportPosition - pivot, leftGripPosition - pivot);
+
+                                if (!MathHelper.IsValid(swing))
+                                    swing = Quaternion.Identity;
+
+                                toolRt = new RelativeTransform(pivot + swing * (toolRt.Position - pivot), swing * toolRt.Orientation);
+
+                                TwoHanded = true;
+                                LeftHandOverride = toolRt * support.Transform * RelativeTransform.Inverse(leftGrip);
+                            }
+                        }
+
                         _heldTool = tool.Entity;
                         _heldToolTransform = toolRt;
                     }
