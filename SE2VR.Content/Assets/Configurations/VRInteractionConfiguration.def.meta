@@ -1,0 +1,15 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3165"
+  },
+  "$Type": "VRage:Keen.VRage.ContentPipeline.Metafiles.MetaData",
+  "$Value": {
+    "AssetID": "52501d2d-8e05-492d-8fb9-2d81c8dcbadc",
+    "InternalItems": []
+  }
+}

@@ -69,6 +69,12 @@ public partial class OpenVROptions : ObservableObject, IOptionsPart
     [Notify]
     private bool _cameraMode;
 
+    /// <summary>
+    /// <see cref="ControlMode"/>
+    /// </summary>
+    [Notify]
+    private ControlMode _controlMode = ControlMode.Motion;
+
     [NoSerialize]
     public Vector3 WorldOffset;
 
@@ -96,4 +102,21 @@ public partial class OpenVROptions : ObservableObject, IOptionsPart
         transform.Position *= GetScale();
         return transform;
     }
+}
+
+/// <summary>
+/// How the player interacts with the world
+/// </summary>
+public enum ControlMode
+{
+    /// <summary>
+    /// Vanilla interaction is disabled and tracked hands are used for interaction instead.
+    /// </summary>
+    Motion,
+
+    /// <summary>
+    /// Disables hand tracking and uses vanilla interaction aimed with the head instead.
+    /// KBM/Gamepad
+    /// </summary>
+    Other,
 }

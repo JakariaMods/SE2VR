@@ -12,7 +12,7 @@ using Valve.VR;
 namespace SE2VR.Client.Components;
 
 /// <summary>
-/// Session component for vibrating the controllers based on current camera shakes
+/// Session component for vibrating the controllers based on current camera shakes/inputs
 /// https://github.com/ValveSoftware/openvr/wiki/SteamVR-Input
 /// </summary>
 public partial class HapticsSessionComponent : SessionComponent
@@ -33,11 +33,22 @@ public partial class HapticsSessionComponent : SessionComponent
 
     private OpenVROptions _vrOptions;
 
+    private ulong _hapticAction;
+    private ulong _leftHandSource;
+    private ulong _rightHandSource;
+
     [Init]
     protected new void Init()
     {
         base.Init();
         _vrOptions = _options.GetOrCreatePart<OpenVROptions>();
+
+        var error = OpenVR.Input.GetActionHandle("/actions/default/out/Haptic", ref _hapticAction);
+        if (error != EVRInputError.None)
+            Logging.Error($"GetActionHandle {error}");
+
+        OpenVR.Input.GetInputSourceHandle("/user/hand/left", ref _leftHandSource);
+        OpenVR.Input.GetInputSourceHandle("/user/hand/right", ref _rightHandSource);
     }
 
     [HapticsUpdate]
@@ -51,11 +62,6 @@ public partial class HapticsSessionComponent : SessionComponent
         if (!shakes.Shaking)
             return;
 
-        ulong handle = 0;
-        var error = OpenVR.Input.GetActionHandle("/actions/default/out/Haptic", ref handle);
-        if (error != EVRInputError.None)
-            Logging.Error($"GetActionHandle {error}");
-
         var shakePowerField = typeof(CameraShakeComponent).GetField("_shakePosPower", BindingFlags.NonPublic | BindingFlags.Instance)!;
         float shakePower = (float)shakePowerField.GetValue(shakes)!;
         float normalizedPower = Math.Clamp(shakePower / MAX_SHAKE, 0.0f, 1.0f);
@@ -65,6 +71,18 @@ public partial class HapticsSessionComponent : SessionComponent
 
         float amplitude = (float)Math.Pow(normalizedPower, AMPLITUDE_CURVE) * AMPLITUDE_MULTIPLIER;
         float frequency = MIN_FREQUENCY + (MAX_FREQUENCY - MIN_FREQUENCY) * normalizedPower;
-        OpenVR.Input.TriggerHapticVibrationAction(handle, 0, UpdateTime.SECONDS_PER_STEP * 2, frequency, amplitude, 0);
+        OpenVR.Input.TriggerHapticVibrationAction(_hapticAction, 0, UpdateTime.SECONDS_PER_STEP * 2, frequency, amplitude, 0);
+    }
+
+    /// <summary>
+    /// Vibrates one controller once
+    /// </summary>
+    public void Vibrate(ETrackedControllerRole hand, float amplitude, float duration = 0.02f, float frequency = 150)
+    {
+        if (!_vrOptions.Haptics || amplitude <= 0)
+            return;
+
+        ulong source = hand == ETrackedControllerRole.LeftHand ? _leftHandSource : _rightHandSource;
+        OpenVR.Input.TriggerHapticVibrationAction(_hapticAction, 0, duration, frequency, amplitude, source);
     }
 }

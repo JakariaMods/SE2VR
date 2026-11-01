@@ -64,6 +64,8 @@ public partial class OpenVRInputEngineComponent : Component
 
     private ulong _leftGrabAction;
     private ulong _rightGrabAction;
+    private ulong _leftTriggerAction;
+    private ulong _rightTriggerAction;
 
     /// <summary>
     /// 0-1 curl of each finger. 0 is extended, 1 is fully closed
@@ -84,6 +86,16 @@ public partial class OpenVRInputEngineComponent : Component
     /// The right hand's grab (grip) is held
     /// </summary>
     public bool RightGrab { get; private set; }
+
+    /// <summary>
+    /// The left hand's trigger is held
+    /// </summary>
+    public bool LeftTrigger { get; private set; }
+
+    /// <summary>
+    /// The right hand's trigger is held
+    /// </summary>
+    public bool RightTrigger { get; private set; }
 
     [Init]
     protected void Init()
@@ -111,6 +123,12 @@ public partial class OpenVRInputEngineComponent : Component
 
         if (OpenVR.Input.GetActionHandle("/actions/default/in/GrabRight", ref _rightGrabAction) != EVRInputError.None)
             throw new Exception("Couldn't bind right hand grab");
+
+        if (OpenVR.Input.GetActionHandle("/actions/default/in/InteractSecondary", ref _leftTriggerAction) != EVRInputError.None)
+            throw new Exception("Couldn't bind left hand trigger");
+
+        if (OpenVR.Input.GetActionHandle("/actions/default/in/InteractPrimary", ref _rightTriggerAction) != EVRInputError.None)
+            throw new Exception("Couldn't bind right hand trigger");
 
         AddMapping("/actions/default", "/actions/default/in/InteractPrimary", new DigitalInput(),
         [
@@ -314,6 +332,9 @@ public partial class OpenVRInputEngineComponent : Component
 
         LeftGrab = new DigitalInput().GetValue(_leftGrabAction).Active;
         RightGrab = new DigitalInput().GetValue(_rightGrabAction).Active;
+
+        LeftTrigger = new DigitalInput().GetValue(_leftTriggerAction).Active;
+        RightTrigger = new DigitalInput().GetValue(_rightTriggerAction).Active;
 
         foreach (var set in ActionSets.Values)
         {

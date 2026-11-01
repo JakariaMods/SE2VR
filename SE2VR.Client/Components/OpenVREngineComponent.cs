@@ -13,6 +13,7 @@ using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using OpenVRAPI;
 using SE2VR.Client.Input;
+using SE2VR.Client.Patches;
 using SE2VR.Simulation;
 using Valve.VR;
 
@@ -90,6 +91,8 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
             VROptions.ForceSerialization();
         }
 
+        InteractorEntityComponent_UpdateInputContexts_Patch.Enabled = VROptions.ControlMode != ControlMode.Motion;
+
         GameFeatureConfig.EquipDelays = false;
 
         Logging.Info($"Successfully initialized {nameof(OpenVR)}");
@@ -123,9 +126,12 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
         sessionBuilder.SessionComponents.WithComponent<OpenVRSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<VRArmsSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<VRBodyHidingSessionComponent>();
-        sessionBuilder.SessionComponents.WithComponent<PhysicsHandClientSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<HapticsSessionComponent>();
+        sessionBuilder.SessionComponents.WithComponent<PhysicsHandClientSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<VRPauseSessionComponent>();
+
+        if (VROptions.ControlMode == ControlMode.Motion)
+            sessionBuilder.SessionComponents.WithComponent<VRInteractionSessionComponent>();
 
         if (VROptions.ShowControllers)
             sessionBuilder.SessionComponents.WithComponent<VRControllersSessionComponent>();
@@ -158,7 +164,7 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
             var matrix = devicePoses[device].mDeviceToAbsoluteTracking;
 
             var trackedDeviceClass = System.GetTrackedDeviceClass(device);
-            if (trackedDeviceClass == ETrackedDeviceClass.Controller)
+            if (trackedDeviceClass == ETrackedDeviceClass.Controller && VROptions.ControlMode == ControlMode.Motion)
             {
                 VRControllerState_t state = default;
                 bool hasData = System.GetControllerState(device, ref state, (uint)Marshal.SizeOf<VRControllerState_t>());
