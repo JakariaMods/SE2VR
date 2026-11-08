@@ -19,6 +19,9 @@ public class MyRenderView(object box)
     private static readonly PropertyInfo _lastUpdateWasSmoothProperty;
     private static readonly MethodInfo _setCameraParametersMethod;
     private static readonly MethodInfo _onFrameEndMethod;
+    private static readonly PropertyInfo _viewDProperty;
+    private static readonly PropertyInfo _projectionProperty;
+    private static readonly MethodInfo _createProjectionMatricesMethod;
     private static readonly FieldInfo _cameraSpeedBufferField;
     private static readonly FieldInfo _lastFrameCameraPositionWithCutsField;
     private static readonly FieldInfo[] _temporalFields;
@@ -48,6 +51,9 @@ public class MyRenderView(object box)
         _lastUpdateWasSmoothProperty = AccessTools.Property(type, "LastUpdateWasSmooth");
         _setCameraParametersMethod = AccessTools.Method(type, "SetCameraParameters");
         _onFrameEndMethod = AccessTools.Method(type, "OnFrameEnd");
+        _viewDProperty = AccessTools.Property(type, "ViewD");
+        _projectionProperty = AccessTools.Property(type, "Projection");
+        _createProjectionMatricesMethod = AccessTools.Method(type, "CreateProjectionMatrices");
         _cameraSpeedBufferField = AccessTools.Field(type, "_cameraSpeedBuffer");
 
         _temporalFields =
@@ -75,9 +81,20 @@ public class MyRenderView(object box)
             field.SetValue(box, field.GetValue(from.Box));
     }
 
-    public void SetCameraParameters(in MatrixD cameraTransform, float fov, float nearPlane, float farPlane, float veryFarPlane, Vector2 projectionOffset, bool smooth)
+    public void SetCameraParameters(in MatrixD cameraTransform, in Matrix projection, float nearPlane, float farPlane, float veryFarPlane, bool smooth)
     {
+        float fov = 2f * MathF.Atan(1f / projection.M22);
+        var projectionOffset = new Vector2(projection.M31, projection.M32);
         _setCameraParametersMethod.Invoke(box, [cameraTransform, fov, nearPlane, farPlane, veryFarPlane, projectionOffset, smooth, false]);
+
+        var viewD = (MatrixD)_viewDProperty.GetValue(box)!;
+        var viewAt0 = viewD;
+        viewAt0.M14 = viewAt0.M24 = viewAt0.M34 = 0;
+        viewAt0.M41 = viewAt0.M42 = viewAt0.M43 = 0;
+        viewAt0.M44 = 1;
+
+        object? matrices = _createProjectionMatricesMethod.Invoke(null, [projection, viewAt0, viewD]);
+        _projectionProperty.SetValue(box, matrices);
     }
 
     public void OnFrameEnd() => _onFrameEndMethod.Invoke(box, null);

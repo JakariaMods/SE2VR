@@ -73,6 +73,11 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
             throw new Exception($"Failed to initialize {nameof(OpenVR)}");
 
         Logging.Debug("OpenVR booted with code {0}", error);
+
+        uint hmd = OpenVR.k_unTrackedDeviceIndex_Hmd;
+        string manufacturer = VRUtils.GetDeviceProperty(hmd, ETrackedDeviceProperty.Prop_ManufacturerName_String);
+        string model = VRUtils.GetDeviceProperty(hmd, ETrackedDeviceProperty.Prop_ModelNumber_String);
+        Logging.Info($"Headset: {manufacturer}-{model} ");
         
         string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, MANIFEST_FILE);
         Logging.Debug("OpenVR manifest located at '{0}'", path);

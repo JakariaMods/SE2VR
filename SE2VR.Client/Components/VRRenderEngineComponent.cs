@@ -240,9 +240,8 @@ public partial class VRRenderEngineComponent : EngineComponent
         if (eye == EVREye.Eye_Right)
             view.LastCameraPosition = _eyeViews[EVREye.Eye_Left].InvViewD.Translation;
 
-        var projection = VRUtils.GetPerspectiveFovRhInfiniteComplementary(eye, _centerView.NearClipping);
-        float fov = 2f * MathF.Atan(1f / (float)projection.M22);
-        view.SetCameraParameters(eyeWorld, fov, _centerView.NearClipping, _centerView.FarClipping, _centerView.VeryFarClipping, new((float)projection.M31, (float)projection.M32), smooth: history != null);
+        var projection = (Matrix)VRUtils.GetPerspectiveFovRhInfiniteComplementary(eye, _centerView.NearClipping);
+        view.SetCameraParameters(eyeWorld, projection, _centerView.NearClipping, _centerView.FarClipping, _centerView.VeryFarClipping, smooth: history != null);
 
         MyCoreSystems.Settings.RenderView = view;
         MyCoreSystems.Settings.PreviousRenderView = history ?? view;
