@@ -1,4 +1,6 @@
+using Keen.Game2.Client.UI.TerminalScreen.Inventory;
 using Keen.Game2.Simulation;
+using Keen.Game2.Simulation.GameSystems.Identities;
 using Keen.Game2.Simulation.Replication;
 using Keen.Game2.Simulation.WorldObjects.Characters;
 using Keen.Game2.Simulation.WorldObjects.FloatingObjects;
@@ -12,13 +14,13 @@ using Keen.VRage.Core.Game.Systems;
 using Keen.VRage.DCS.Accessors;
 using Keen.VRage.DCS.Annotations;
 using Keen.VRage.DCS.Components;
-using Keen.VRage.DCS.ObjectBuilders;
-using Keen.VRage.Game.Components.Models;
 using Keen.VRage.Library.Mathematics;
 using Keen.VRage.Library.Memory;
 using Keen.VRage.Library.Reflection.DependencyInjections;
 using Keen.VRage.Library.Serialization;
+using Keen.VRage.Multiplayer;
 using Keen.VRage.Multiplayer.Annotations;
+using Keen.VRage.Multiplayer.NetworkStories;
 using Keen.VRage.Physics;
 using Keen.VRage.Physics.Data;
 using Keen.VRage.Physics.Queries;
@@ -97,7 +99,12 @@ public partial class PhysicsHandServerSessionComponent : SessionComponent
                 held = null;
 
                 if (otherHeld?.Entity != current.Entity && current.Entity.TryGet<FloatingObjectComponent>() != null && Session.IsEntityInScene(current.Entity) && IsTransformBehindHead(hands, handTransform))
+                {
                     Session.Get<IGameServer>()?.PickupFloatingObject(current.Entity, character);
+
+                    if (Session.Get<IdentitiesSessionComponent>()?.TryGetClientFromEntity(character) is { } client)
+                        OnPickup(Session, client).SkipWait();
+                }
             }
 
             if (grab && !wasGrabbing && held == null)
@@ -171,6 +178,12 @@ public partial class PhysicsHandServerSessionComponent : SessionComponent
             return null;
 
         return (closest, (RelativeTransform)WorldTransform.GetRelativeTransform(closest.Data.GetWorldTransform(), handTransform));
+    }
+
+    private static async NetworkStory OnPickup(Session session, ClientId client)
+    {
+        await MoveTo.Client(client);
+        session.Get<IInventoryEffects>().PickupItem();
     }
 
     [JobContext]
