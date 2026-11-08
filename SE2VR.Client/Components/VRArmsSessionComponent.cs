@@ -80,7 +80,7 @@ public partial class VRArmsSessionComponent : SessionComponent
             PoseFingers(ref pose, _leftFingerJoints, _input.LeftFingers);
         }
 
-        if (_vr.RightHand is { } right)
+        if ((_vrSession.RightHandOverride ?? _vr.RightHand) is { } right)
         {
             PoseArm(ref pose, _rightWrist, _rightElbowPart1, _rightElbow, right * _config.RightHand.WristOffset);
             PoseFingers(ref pose, _rightFingerJoints, _input.RightFingers);

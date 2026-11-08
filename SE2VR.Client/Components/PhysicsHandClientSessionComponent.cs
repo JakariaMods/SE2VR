@@ -48,7 +48,7 @@ public partial class PhysicsHandClientSessionComponent : SessionComponent
         var input = OpenVRInputEngineComponent.Instance;
 
         var left = _vrSession.LeftHandOverride ?? vr.LeftHand;
-        var right = vr.RightHand;
+        var right = _vrSession.RightHandOverride ?? vr.RightHand;
 
         character.Data.Set(new VRHandData
         {

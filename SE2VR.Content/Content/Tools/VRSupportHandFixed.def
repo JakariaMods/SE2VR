@@ -1,0 +1,14 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3165"
+  },
+  "$Type": "VRage:Keen.VRage.Core.Model.DummyTypeDefinitionObjectBuilder",
+  "$Value": {
+    "Guid": "e0c55975-510c-4bb7-93aa-53692f2cdfed"
+  }
+}

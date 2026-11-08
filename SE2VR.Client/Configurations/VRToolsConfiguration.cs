@@ -22,7 +22,12 @@ public partial class VRToolsConfiguration : Configuration
     /// <summary>
     /// Dummy that defines a secondary grip for two-handed tools
     /// </summary>
-    public DummyTypeDefinition? SecondaryGripDummy { get; private set; }
+    public DummyTypeDefinition SecondaryGripDummy { get; private set; }
+
+    /// <summary>
+    /// Dummy that defines a secondary grip the hand is locked to, without rotating around the handle like <see cref="SecondaryGripDummy"/>
+    /// </summary>
+    public DummyTypeDefinition FixedSecondaryGripDummy { get; private set; }
 
     /// <summary>
     /// Grip of the left hand relative to the tracked (raw) controller pose, that <see cref="SecondaryGripDummy"/> is aligned with

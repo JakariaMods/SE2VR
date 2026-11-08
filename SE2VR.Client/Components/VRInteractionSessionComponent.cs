@@ -106,7 +106,7 @@ public partial class VRInteractionSessionComponent : SessionComponent, IInSceneL
         var input = OpenVRInputEngineComponent.Instance;
         var character = _vrSession.ControlledEntity.Entity is { } controlled && controlled.TryGet<CharacterComponent>() != null ? controlled : null;
         var left = _vrSession.LeftHandOverride ?? vr.LeftHand;
-        var right = vr.RightHand;
+        var right = _vrSession.RightHandOverride ?? vr.RightHand;
         var bindings = character?.GetComposition().TryGetDefinition<InteractorEntityComponent, InteractorEntityComponentDefinition>()?.UseActionBindings;
         var controller = _players.LocalPlayerController;
 

@@ -13,6 +13,7 @@
     "BarrelDummy": "64a7d585-9aed-4376-9483-9eb42d24c28d",
     "HandDummy": "b7069463-1012-4a28-af7d-cf9f08e932c0",
     "SecondaryGripDummy": "4df8cfdb-c414-4f47-8ee9-51dc283a4313",
+    "FixedSecondaryGripDummy": "e0c55975-510c-4bb7-93aa-53692f2cdfed",
     "LeftControllerGrip": {
       "Transform": {
         "Position": {

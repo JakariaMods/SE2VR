@@ -81,6 +81,11 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
     /// </summary>
     public RelativeTransform? LeftHandOverride { get; private set; }
 
+    /// <summary>
+    /// Controller pose the right hand is snapped to while <see cref="TwoHanded"/>
+    /// </summary>
+    public RelativeTransform? RightHandOverride { get; private set; }
+
     private bool _leftGrabHeld;
 
     private OpenVREngineComponent _vr;
@@ -200,6 +205,7 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
         bool wasTwoHanded = TwoHanded;
         TwoHanded = false;
         LeftHandOverride = null;
+        RightHandOverride = null;
 
         bool leftGrab = OpenVRInputEngineComponent.Instance.LeftGrab;
         bool leftGrabPressed = leftGrab && !_leftGrabHeld;
@@ -221,7 +227,7 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
                     {
                         toolRt = right * _tools.RightControllerGrip * RelativeTransform.Inverse(hand.Transform);
 
-                        if (leftGrab && _vr.LeftHand is { } left && _tools.SecondaryGripDummy is { } supportType && model.TryGetDummy(supportType) is { } support)
+                        if (leftGrab && _vr.LeftHand is { } left && (model.TryGetDummy(_tools.SecondaryGripDummy) ?? model.TryGetDummy(_tools.FixedSecondaryGripDummy)) is { } support)
                         {
                             RelativeTransform leftGrip = _tools.LeftControllerGrip;
                             var supportPosition = (toolRt * support.Transform).Position;
@@ -238,7 +244,11 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
                                 toolRt = new RelativeTransform(pivot + swing * (toolRt.Position - pivot), swing * toolRt.Orientation);
 
                                 TwoHanded = true;
-                                LeftHandOverride = toolRt * support.Transform * RelativeTransform.Inverse(leftGrip);
+                                var supportRt = toolRt * support.Transform;
+                                var gripOrientation = support.Type == _tools.FixedSecondaryGripDummy ? supportRt.Orientation : GetSecondaryGripOrientation(supportRt.Orientation, (left * leftGrip).Orientation);
+                                
+                                LeftHandOverride = new RelativeTransform(supportRt.Position, gripOrientation) * RelativeTransform.Inverse(leftGrip);
+                                RightHandOverride = toolRt * hand.Transform * RelativeTransform.Inverse(_tools.RightControllerGrip);
                             }
                         }
 
@@ -278,5 +288,19 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
             GunToolComponent_GetProjectileTransform_Patch.Transform = null;
             GunToolComponent_GetProjectileVisualsTransform_Patch.Transform = null;
         }
+    }
+
+    private static Quaternion GetSecondaryGripOrientation(Quaternion support, Quaternion hand)
+    {
+        var handleAxis = support.GetUp();
+        if (Vector3.Dot(hand.GetUp(), handleAxis) < 0)
+            handleAxis = -handleAxis;
+
+        var forward = Vector3.ProjectOnPlane(hand.GetForward(), handleAxis);
+        if (forward.LengthSquared().IsZero())
+            forward = Vector3.ProjectOnPlane(support.GetForward(), handleAxis);
+
+        var orientation = Quaternion.CreateFromForwardUp(Vector3.Normalize(forward), handleAxis);
+        return MathHelper.IsValid(orientation) ? orientation : support;
     }
 }
