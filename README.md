@@ -3,9 +3,7 @@
 # SE2VR Plugin (VS4.0.0.3165+)
 This is a plugin that adds [OpenVR](https://github.com/ValveSoftware/openvr) support to [Space Engineers 2](https://store.steampowered.com/app/1133870/Space_Engineers_2/). This project aims to make the Space Engineers 2 survival experience playable from start to finish in VR.
 
-https://www.youtube.com/watch?v=IntVsKmTe7k
-
-https://www.youtube.com/watch?v=CkOQraQ0wsI
+https://www.youtube.com/watch?v=B1hnT4PmXbg
 
 # Compiling:
 
