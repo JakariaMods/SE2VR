@@ -1,3 +1,5 @@
+using Keen.Game2.Client.GameSystems.PlayerControl;
+using Keen.Game2.Client.WorldObjects.Tools;
 using Keen.Game2.Simulation.WorldObjects.Weapons;
 using Keen.VRage.Core.Game.Components;
 using Keen.VRage.Core.Game.GameSystems.GameTimes;
@@ -25,12 +27,18 @@ public partial class VRRecoilSessionComponent : SessionComponent
     [Service]
     private readonly IGameTime _gameTime;
 
+    [Service]
+    private readonly ClientPlayersSessionComponent _players;
+
     [Component(WeakDependency = true)]
     private readonly OpenVRSessionComponent _vrSession;
 
     private Vector2 _pendingRecoil;
     private float _recoilSecondsRemaining;
     private Vector2 _currentRecoil;
+
+    private GunToolControllableComponent? _currentGun;
+    private bool _aimDownSightsApplied;
 
     [Init]
     protected new void Init()
@@ -47,6 +55,9 @@ public partial class VRRecoilSessionComponent : SessionComponent
 
     private void OnRecoil(Entity source, RecoilKick kick, RecoilPatternDefinition pattern)
     {
+        if (source != _currentGun?.Entity)
+            return;
+
         var angles = new Vector2(kick.PitchRadians, kick.YawRadians);
         _pendingRecoil += angles * _config.RecoilMultiplier;
         _recoilSecondsRemaining = pattern.KickApplySeconds;
@@ -76,6 +87,35 @@ public partial class VRRecoilSessionComponent : SessionComponent
         }
 
         _currentRecoil *= MathF.Exp(-_config.RecoveryRate * deltaSeconds);
+    }
+
+    [OpenVRSessionComponent.ToolUpdateSystem.RecoilUpdate]
+    private void UpdateGun()
+    {
+        //Component on gun input handler would be better TODO #31
+        var gun = _players.LocalPlayerController.GetTopControllable<ToolControllableComponent>()?.Entity.TryGet<GunToolControllableComponent>();
+
+        if (_currentGun != gun)
+        {
+            _currentGun = gun;
+            _aimDownSightsApplied = false;
+        }
+
+        if (_currentGun == null)
+            return;
+
+        if (_vrSession.TwoHanded)
+        {
+            if (!_currentGun.IsAimingDownSights())
+                _currentGun.RequestAimDownSights(true);
+
+            _aimDownSightsApplied = true;
+        }
+        else if (_aimDownSightsApplied)
+        {
+            _currentGun.RequestAimDownSights(false);
+            _aimDownSightsApplied = false;
+        }
     }
 
     /// <summary>
