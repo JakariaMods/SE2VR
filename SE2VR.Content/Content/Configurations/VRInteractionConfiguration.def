@@ -1,9 +1,9 @@
 {
   "$Bundles": {
     "Game2": "4.0.0.3165",
-    "SE2VR": "1.1.2.1",
-    "SE2VR.Client": "1.1.2.1",
-    "SE2VR.Simulation": "1.1.2.1",
+    "SE2VR": "1.1.3.1",
+    "SE2VR.Client": "1.1.3.1",
+    "SE2VR.Simulation": "1.1.3.1",
     "System.Runtime": "1.0.0.0",
     "VRage": "4.0.0.3165"
   },
@@ -21,44 +21,57 @@
         "Subpart": "Trigger"
       },
       "d3f7336c-2ed2-4903-ac01-1aacbcfd931f": {
-        "Root": "Trigger"
+        "Root": "Trigger",
+        "Subpart": null
       },
       "32dcafce-fc08-4661-84da-b874a2afba9d": {
-        "Root": "Grip"
+        "Root": "Grip",
+        "Subpart": null
       },
       "be2867f3-78b8-4a8d-95cc-9d35d788b68b": {
-        "Root": "Grip"
+        "Root": "Grip",
+        "Subpart": null
       },
       "0414ed0a-fb59-495c-b138-8524768ebc34": {
-        "Root": "Grip"
+        "Root": "Grip",
+        "Subpart": null
       },
       "9a797703-5cab-43bb-840a-8fb9aa4a4013": {
-        "Root": "None"
+        "Root": "None",
+        "Subpart": null
       },
       "a3412971-c399-4aac-a1c0-51318f411c7f": {
-        "Root": "Trigger"
+        "Root": "Trigger",
+        "Subpart": null
       },
       "8179c15b-3760-4e0d-98b2-b32204daab72": {
-        "Root": "Trigger"
+        "Root": "Trigger",
+        "Subpart": null
       },
       "a514581d-b771-4d51-9f37-abf0130000f1": {
-        "Root": "Touch, Trigger"
+        "Root": "Touch, Trigger",
+        "Subpart": null
       },
       "58383da5-f2ca-499c-a11d-b6d2809ae6fc": {
-        "Root": "Touch, Trigger"
+        "Root": "Touch, Trigger",
+        "Subpart": null
       },
       "72e1ac31-615e-47fe-aa63-35a0aea66a25": {
-        "Root": "Trigger"
+        "Root": "Trigger",
+        "Subpart": null
       },
       "9b5f3902-6c3c-401a-b715-3873b4a63ab3": {
-        "Root": "Trigger"
+        "Root": "Trigger",
+        "Subpart": null
       },
       "48f189e1-94fb-4005-9350-37afb5384015": {
-        "Root": "Touch, Trigger"
+        "Root": "Touch, Trigger",
+        "Subpart": null
       }
     },
     "DefaultMode": {
-      "Root": "Trigger"
+      "Root": "Trigger",
+      "Subpart": null
     }
   }
 }

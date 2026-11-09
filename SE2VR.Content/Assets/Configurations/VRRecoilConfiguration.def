@@ -1,0 +1,16 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.2.1",
+    "SE2VR.Client": "1.1.2.1",
+    "SE2VR.Simulation": "1.1.2.1",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3165"
+  },
+  "$Type": "SE2VR.Client:SE2VR.Client.Configurations.VRRecoilConfigurationObjectBuilder",
+  "$Value": {
+    "Guid": "a38b822d-3b76-4fd7-9127-32881d55177a",
+    "RecoilMultiplier": 4,
+    "RecoveryRate": 8
+  }
+}

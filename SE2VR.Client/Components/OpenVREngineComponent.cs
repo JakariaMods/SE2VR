@@ -132,6 +132,7 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
         sessionBuilder.SessionComponents.WithComponent<VRArmsSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<VRBodyHidingSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<HapticsSessionComponent>();
+        sessionBuilder.SessionComponents.WithComponent<VRRecoilSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<PhysicsHandClientSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<VRPauseSessionComponent>();
 

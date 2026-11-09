@@ -1,9 +1,9 @@
 {
   "$Bundles": {
     "Game2": "4.0.0.3165",
-    "SE2VR": "1.1.2.1",
-    "SE2VR.Client": "1.1.2.1",
-    "SE2VR.Simulation": "1.1.2.1",
+    "SE2VR": "1.1.3.1",
+    "SE2VR.Client": "1.1.3.1",
+    "SE2VR.Simulation": "1.1.3.1",
     "System.Runtime": "1.0.0.0",
     "VRage": "4.0.0.3165"
   },
@@ -13,7 +13,7 @@
     "InternalItems": [
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Structure.FileInfoMetaDataItem",
-        "FileHash": "g/CsX7WpBJnzgL+u01ZYOw=="
+        "FileHash": "GUd9JIAM7Dim0D2AGZ6m7Q=="
       },
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Features.AssetProcessing.AssetProcessingMetaDataItem",
@@ -23,14 +23,14 @@
         },
         "ContentFiles": {
           "MainOutput": {
-            "FileHash": "1RUfIytXSw/Gwm6IgbN7KQ==",
+            "FileHash": "0z45CEdtx8+jPGRo/emwSA==",
             "FileName": "Rifle_VRDummies.def"
           },
           "AdditionalOutputs": []
         },
         "Problems": [],
         "DependenciesHashes": [],
-        "AssetHash": "g/CsX7WpBJnzgL+u01ZYOw==",
+        "AssetHash": "GUd9JIAM7Dim0D2AGZ6m7Q==",
         "OverrideDetachedState": false,
         "IgnoredErrors": "None"
       }

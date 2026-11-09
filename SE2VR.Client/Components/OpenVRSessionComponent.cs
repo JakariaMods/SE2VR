@@ -42,10 +42,37 @@ namespace SE2VR.Client.Components;
 /// </summary>
 public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
 {
-    [After(typeof(BoneParentedPositionBaseComponent.TransformationUpdateJob))]
-    [Before(typeof(TransformsFinalized))]
-    [Before(typeof(RenderSubmissionBegin))]
-    private class ToolTransformJob : JobGroup;
+    /// <summary>
+    /// Update order of VR interaction/hands/tools/etc
+    /// </summary>
+    public partial class ToolUpdateSystem : JobSystem
+    {
+        /// <summary>
+        /// Tick/reset recoil
+        /// </summary>
+        [During(typeof(RigUpdateSystem.InverseKinematicsPostRagdollWindow))]
+        public class RecoilUpdate : JobGroup;
+
+        /// <summary>
+        /// Update positions of tools/hands/interaction origins
+        /// </summary>
+        [During(typeof(RigUpdateSystem.InverseKinematicsPostRagdollWindow))]
+        public class InteractionUpdate : JobGroup;
+
+        /// <summary>
+        /// Update skeleton
+        /// </summary>
+        [During(typeof(RigUpdateSystem.InverseKinematicsPostRagdollWindow))]
+        public class ArmsUpdate : JobGroup;
+
+        /// <summary>
+        /// Overwrites the transform of the held tool (after bone rigging has updated it)
+        /// </summary>
+        [After(typeof(BoneParentedPositionBaseComponent.TransformationUpdateJob))]
+        [Before(typeof(TransformsFinalized))]
+        [Before(typeof(RenderSubmissionBegin))]
+        public class ToolTransformUpdate : JobGroup;
+    }
 
     [Service]
     private readonly IDebugDraw _debugDraw;
@@ -58,6 +85,9 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
 
     [Service]
     private readonly ClientPlayersSessionComponent _players;
+
+    [Service]
+    private readonly VRRecoilSessionComponent _recoil;
 
     [Configuration]
     private readonly VRToolsConfiguration _tools;
@@ -157,7 +187,7 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
     }
 
     [DoNotPause]
-    [RigUpdateSystem.InverseKinematicsPostRagdollWindow.Begin]
+    [ToolUpdateSystem.InteractionUpdate]
     private void Tick()
     {
         if (ControlledEntity.Entity == null)
@@ -191,7 +221,7 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
     }
 
     [DoNotPause]
-    [ToolTransformJob]
+    [ToolUpdateSystem.ToolTransformUpdate]
     private void UpdateToolTransform()
     {
         _heldTool?.Data.Set(_heldToolTransform);
@@ -227,15 +257,17 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
                     {
                         toolRt = right * _tools.RightControllerGrip * RelativeTransform.Inverse(hand.Transform);
 
+                        var pivot = (toolRt * hand.Transform).Position;
+                        RelativeTransform leftGrip = _tools.LeftControllerGrip;
+                        (RelativeTransform Transform, bool Fixed, RelativeTransform Controller)? leftSupport = null;
+
                         if (leftGrab && _vr.LeftHand is { } left && (model.TryGetDummy(_tools.SecondaryGripDummy) ?? model.TryGetDummy(_tools.FixedSecondaryGripDummy)) is { } support)
                         {
-                            RelativeTransform leftGrip = _tools.LeftControllerGrip;
                             var supportPosition = (toolRt * support.Transform).Position;
                             var leftGripPosition = (left * leftGrip).Position;
 
                             if (wasTwoHanded || (leftGrabPressed && Vector3.Distance(leftGripPosition, supportPosition) <= _physicsHands.GrabRadius))
                             {
-                                var pivot = (toolRt * hand.Transform).Position;
                                 var swing = Quaternion.CreateFromTwoVectors(supportPosition - pivot, leftGripPosition - pivot);
 
                                 if (!MathHelper.IsValid(swing))
@@ -244,13 +276,22 @@ public partial class OpenVRSessionComponent : SessionComponent, IInSceneListener
                                 toolRt = new RelativeTransform(pivot + swing * (toolRt.Position - pivot), swing * toolRt.Orientation);
 
                                 TwoHanded = true;
-                                var supportRt = toolRt * support.Transform;
-                                var gripOrientation = support.Type == _tools.FixedSecondaryGripDummy ? supportRt.Orientation : GetSecondaryGripOrientation(supportRt.Orientation, (left * leftGrip).Orientation);
-                                
-                                LeftHandOverride = new RelativeTransform(supportRt.Position, gripOrientation) * RelativeTransform.Inverse(leftGrip);
-                                RightHandOverride = toolRt * hand.Transform * RelativeTransform.Inverse(_tools.RightControllerGrip);
+                                leftSupport = (support.Transform, support.Type == _tools.FixedSecondaryGripDummy, left);
                             }
                         }
+
+                        var aim = (model.TryGetDummy(_tools.BarrelDummy) is { } aimBarrel ? toolRt * aimBarrel.Transform : toolRt).Orientation;
+                        toolRt = new RelativeTransform(pivot, _recoil.GetRotation(aim)) * new RelativeTransform(-pivot) * toolRt;
+
+                        //Repeat positioning to include recoil in left hand when two-anded
+                        if (leftSupport is { } supportGrip)
+                        {
+                            var supportRt = toolRt * supportGrip.Transform;
+                            var gripOrientation = supportGrip.Fixed ? supportRt.Orientation : GetSecondaryGripOrientation(supportRt.Orientation, (supportGrip.Controller * leftGrip).Orientation);
+                            LeftHandOverride = new RelativeTransform(supportRt.Position, gripOrientation) * RelativeTransform.Inverse(leftGrip);
+                        }
+
+                        RightHandOverride = toolRt * hand.Transform * RelativeTransform.Inverse(_tools.RightControllerGrip);
 
                         _heldTool = tool.Entity;
                         _heldToolTransform = toolRt;

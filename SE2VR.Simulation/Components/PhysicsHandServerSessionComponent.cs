@@ -42,6 +42,12 @@ public partial class PhysicsHandServerSessionComponent : SessionComponent
     [Service]
     private readonly IPhysics _physics;
 
+    [Service]
+    private readonly IGameServer _gameServer;
+
+    [Service]
+    private readonly IdentitiesSessionComponent _identities;
+
     [Configuration]
     private readonly PhysicsHandsConfiguration _config;
 
@@ -100,9 +106,9 @@ public partial class PhysicsHandServerSessionComponent : SessionComponent
 
                 if (otherHeld?.Entity != current.Entity && current.Entity.TryGet<FloatingObjectComponent>() != null && Session.IsEntityInScene(current.Entity) && IsTransformBehindHead(hands, handTransform))
                 {
-                    Session.Get<IGameServer>()?.PickupFloatingObject(current.Entity, character);
+                    _gameServer.PickupFloatingObject(current.Entity, character);
 
-                    if (Session.Get<IdentitiesSessionComponent>()?.TryGetClientFromEntity(character) is { } client)
+                    if (_identities.TryGetClientFromEntity(character) is { } client)
                         OnPickup(Session, client).SkipWait();
                 }
             }

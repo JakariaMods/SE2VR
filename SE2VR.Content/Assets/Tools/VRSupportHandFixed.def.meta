@@ -1,9 +1,9 @@
 {
   "$Bundles": {
     "Game2": "4.0.0.3165",
-    "SE2VR": "1.1.2.1",
-    "SE2VR.Client": "1.1.2.1",
-    "SE2VR.Simulation": "1.1.2.1",
+    "SE2VR": "1.1.3.1",
+    "SE2VR.Client": "1.1.3.1",
+    "SE2VR.Simulation": "1.1.3.1",
     "System.Runtime": "1.0.0.0",
     "VRage": "4.0.0.3165"
   },
@@ -13,7 +13,7 @@
     "InternalItems": [
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Structure.FileInfoMetaDataItem",
-        "FileHash": "fobptCYzNVxxPDl+/ft24Q=="
+        "FileHash": "WAP88wIEB+gj0RX5W1yRtQ=="
       },
       {
         "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Features.AssetProcessing.AssetProcessingMetaDataItem",
@@ -23,14 +23,14 @@
         },
         "ContentFiles": {
           "MainOutput": {
-            "FileHash": "SCHmfI2YcqMvHNGHb/Trsw==",
+            "FileHash": "FZdgNKcbwQyc+0Ei62IRTA==",
             "FileName": "VRSupportHandFixed.def"
           },
           "AdditionalOutputs": []
         },
         "Problems": [],
         "DependenciesHashes": [],
-        "AssetHash": "fobptCYzNVxxPDl+/ft24Q==",
+        "AssetHash": "WAP88wIEB+gj0RX5W1yRtQ==",
         "OverrideDetachedState": false,
         "IgnoredErrors": "None"
       }

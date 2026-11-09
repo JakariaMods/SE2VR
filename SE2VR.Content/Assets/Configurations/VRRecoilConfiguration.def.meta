@@ -1,0 +1,39 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3165",
+    "SE2VR": "1.1.3.1",
+    "SE2VR.Client": "1.1.3.1",
+    "SE2VR.Simulation": "1.1.3.1",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3165"
+  },
+  "$Type": "VRage:Keen.VRage.ContentPipeline.Metafiles.MetaData",
+  "$Value": {
+    "AssetID": "a38b822d-3b76-4fd7-9127-32881d55177a",
+    "InternalItems": [
+      {
+        "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Structure.FileInfoMetaDataItem",
+        "FileHash": "xOhyhxHIDPzyUW8nQ8/Bmw=="
+      },
+      {
+        "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Features.AssetProcessing.AssetProcessingMetaDataItem",
+        "ProcessorInfo": {
+          "Version": 2,
+          "Identifier": "P_DEF"
+        },
+        "ContentFiles": {
+          "MainOutput": {
+            "FileHash": "PbyNCiyHb+gN2Pl0VJMcKA==",
+            "FileName": "VRRecoilConfiguration.def"
+          },
+          "AdditionalOutputs": []
+        },
+        "Problems": [],
+        "DependenciesHashes": [],
+        "AssetHash": "xOhyhxHIDPzyUW8nQ8/Bmw==",
+        "OverrideDetachedState": false,
+        "IgnoredErrors": "None"
+      }
+    ]
+  }
+}

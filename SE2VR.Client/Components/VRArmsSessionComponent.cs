@@ -54,7 +54,7 @@ public partial class VRArmsSessionComponent : SessionComponent
     }
 
     [DoNotPause]
-    [RigUpdateSystem.InverseKinematicsPostRagdollWindow.Begin]
+    [OpenVRSessionComponent.ToolUpdateSystem.ArmsUpdate]
     private void Tick()
     {
         if (_vrSession.ControlledEntity.Entity is not { } controlled || controlled.TryGet<CharacterComponent>() is null)

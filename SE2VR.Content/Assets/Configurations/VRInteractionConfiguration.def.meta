@@ -1,15 +1,39 @@
 {
   "$Bundles": {
     "Game2": "4.0.0.3165",
-    "SE2VR": "1.1.2.1",
-    "SE2VR.Client": "1.1.2.1",
-    "SE2VR.Simulation": "1.1.2.1",
+    "SE2VR": "1.1.3.1",
+    "SE2VR.Client": "1.1.3.1",
+    "SE2VR.Simulation": "1.1.3.1",
     "System.Runtime": "1.0.0.0",
     "VRage": "4.0.0.3165"
   },
   "$Type": "VRage:Keen.VRage.ContentPipeline.Metafiles.MetaData",
   "$Value": {
     "AssetID": "52501d2d-8e05-492d-8fb9-2d81c8dcbadc",
-    "InternalItems": []
+    "InternalItems": [
+      {
+        "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Structure.FileInfoMetaDataItem",
+        "FileHash": "ij+8dtZbvz6YUCq9lFvs2Q=="
+      },
+      {
+        "$Type": "VRage:Keen.VRage.ContentPipeline.Project.Features.AssetProcessing.AssetProcessingMetaDataItem",
+        "ProcessorInfo": {
+          "Version": 2,
+          "Identifier": "P_DEF"
+        },
+        "ContentFiles": {
+          "MainOutput": {
+            "FileHash": "uDuZ8I+rbiNcEXaxRz4d2A==",
+            "FileName": "VRInteractionConfiguration.def"
+          },
+          "AdditionalOutputs": []
+        },
+        "Problems": [],
+        "DependenciesHashes": [],
+        "AssetHash": "ij+8dtZbvz6YUCq9lFvs2Q==",
+        "OverrideDetachedState": false,
+        "IgnoredErrors": "None"
+      }
+    ]
   }
 }
