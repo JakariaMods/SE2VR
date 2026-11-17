@@ -37,6 +37,16 @@
           "path": "/user/hand/right/output/haptic"
         }
       ],
+      "poses": [
+        {
+          "output": "/actions/default/in/pointerleft",
+          "path": "/user/hand/left/pose/tip"
+        },
+        {
+          "output": "/actions/default/in/pointerright",
+          "path": "/user/hand/right/pose/tip"
+        }
+      ],
       "skeleton": [
         {
           "output": "/actions/default/in/skeletonlefthand",
@@ -209,7 +219,7 @@
         {
           "inputs": {
             "click": {
-              "output": "/actions/default/in/map"
+              "output": "/actions/default/in/pause"
             }
           },
           "mode": "button",
@@ -219,29 +229,7 @@
       ]
     },
     "/actions/menu": {
-      "sources": [
-        {
-          "inputs": {
-            "east": {
-              "output": "/actions/menu/in/uiright"
-            },
-            "north": {
-              "output": "/actions/menu/in/uiup"
-            },
-            "south": {
-              "output": "/actions/menu/in/uidown"
-            },
-            "west": {
-              "output": "/actions/menu/in/uileft"
-            }
-          },
-          "mode": "dpad",
-          "parameters": {
-            "sub_mode": "touch"
-          },
-          "path": "/user/hand/right/input/thumbstick"
-        }
-      ]
+      "sources": []
     },
     "/actions/paint": {
       "sources": [

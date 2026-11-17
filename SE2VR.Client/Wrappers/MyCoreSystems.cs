@@ -29,6 +29,8 @@ public static class MyCoreSystems
     private static readonly MethodInfo _commonResourcesEndDrawMethod;
     private static readonly MethodInfo _drawContextsBeginDrawMethod;
     private static readonly MethodInfo _drawContextsEndDrawMethod;
+    private static readonly FieldInfo _mainUISystemField;
+    private static readonly MethodInfo _mainUISystemDoWorkMethod;
 #pragma warning restore KN023
 
     public static MyDeviceContext DeviceContext => new(_deviceContextField.GetValue(null));
@@ -66,6 +68,8 @@ public static class MyCoreSystems
         _timeField = AccessTools.Field(type, "Time");
         _animationIsPausedProperty = AccessTools.Property(_timeField.FieldType, "AnimationIsPaused");
         _finalLDRTextureProperty = AccessTools.Property(_screenBuffersField.FieldType, "FinalLDRTexture");
+        _mainUISystemField = AccessTools.Field(type, "MainUISystem");
+        _mainUISystemDoWorkMethod = AccessTools.Method(_mainUISystemField.FieldType, "DoWork");
 
         var frameDispatcher = AccessTools.TypeByName("Keen.VRage.Render12.Core.Systems.FrameDispatcher");
         _createDirectCommandListMethod = AccessTools.Method(frameDispatcher, "CreateDirectCommandList");
@@ -78,6 +82,8 @@ public static class MyCoreSystems
     public static void FlushAllQueuesAndWaitCpu() => _flushAllQueuesMethod.Invoke(_frameDispatcherField.GetValue(null), null);
 
     public static void FlushQueues() => _flushQueuesMethod.Invoke(_frameDispatcherField.GetValue(null), null);
+
+    public static void DrawUI(MyCommandList commandList, MyTexture target) => _mainUISystemDoWorkMethod.Invoke(_mainUISystemField.GetValue(null), [commandList.Instance, target.Instance, target.Resolution]);
 
     public static void BeginDraw()
     {

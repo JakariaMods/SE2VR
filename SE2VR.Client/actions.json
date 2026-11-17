@@ -16,6 +16,14 @@
       "skeleton": "/skeleton/hand/right"
     },
     {
+      "name": "/actions/default/in/PointerLeft",
+      "type": "pose"
+    },
+    {
+      "name": "/actions/default/in/PointerRight",
+      "type": "pose"
+    },
+    {
       "name": "/actions/default/in/InteractPrimary",
       "type": "boolean"
     },
@@ -149,6 +157,8 @@
       "language_tag": "en_US",
       "/actions/default/in/SkeletonLeftHand": "Left Hand Skeleton",
       "/actions/default/in/SkeletonRightHand": "Right Hand Skeleton",
+      "/actions/default/in/PointerLeft": "Left Menu Pointer",
+      "/actions/default/in/PointerRight": "Right Menu Pointer",
       "/actions/default/in/InteractPrimary": "Interact Primary (Tool Primary, Place Block, UI, etc)",
       "/actions/default/in/InteractSecondary": "Interact Secondary (Tool Secondary)",
       "/actions/default/in/GrabLeft": "Grab Left (Grab objects, support two-handed tools)",

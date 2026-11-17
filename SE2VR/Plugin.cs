@@ -66,6 +66,7 @@ public class Plugin : IPlugin
             engineBuilder.EntityBuilder.WithComponent<OpenVREngineComponent>();
             engineBuilder.EntityBuilder.WithComponent<OpenVRInputEngineComponent>();
             engineBuilder.EntityBuilder.WithComponent<VRRenderEngineComponent>();
+            engineBuilder.EntityBuilder.WithComponent<VRUIEngineComponent>();
             engineBuilder.EntityBuilder.WithComponent<VRLoadingEngineComponent>();
 
             engineBuilder.SceneBuilder.AddJobsFromAssembly(typeof(OpenVREngineComponent).Assembly);

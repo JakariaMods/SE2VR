@@ -9,7 +9,7 @@ namespace SE2VR.Client.Patches;
 [HarmonyPatch("Keen.VRage.Platform.Windows.Forms.GameWindow", "IsCursorVisible", MethodType.Setter)]
 public static class GameWindowPatch
 {
-    public static bool CursorVisible;
+    public static bool CursorVisible = true;
     public static event Action<bool>? OnCursorVisibleChanged;
 
     [HarmonyPostfix]

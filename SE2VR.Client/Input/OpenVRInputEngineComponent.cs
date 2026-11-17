@@ -43,8 +43,6 @@ public partial class OpenVRInputEngineComponent : Component
     [Service]
     private readonly IOptions _options;
 
-    [Service]
-    private readonly IPlatformWindows _platform;
 
     [Component]
     private readonly EngineDataLoaderComponent _engineDataLoader;
@@ -66,6 +64,8 @@ public partial class OpenVRInputEngineComponent : Component
     private ulong _rightGrabAction;
     private ulong _leftTriggerAction;
     private ulong _rightTriggerAction;
+    private ulong _leftPointerAction;
+    private ulong _rightPointerAction;
 
     /// <summary>
     /// 0-1 curl of each finger. 0 is extended, 1 is fully closed
@@ -130,6 +130,12 @@ public partial class OpenVRInputEngineComponent : Component
         if (OpenVR.Input.GetActionHandle("/actions/default/in/InteractPrimary", ref _rightTriggerAction) != EVRInputError.None)
             throw new Exception("Couldn't bind right hand trigger");
 
+        if (OpenVR.Input.GetActionHandle("/actions/default/in/PointerLeft", ref _leftPointerAction) != EVRInputError.None)
+            throw new Exception("Couldn't bind left hand pointer");
+
+        if (OpenVR.Input.GetActionHandle("/actions/default/in/PointerRight", ref _rightPointerAction) != EVRInputError.None)
+            throw new Exception("Couldn't bind right hand pointer");
+
         AddMapping("/actions/default", "/actions/default/in/InteractPrimary", new DigitalInput(),
         [
             new Guid("b065cbdb-e7c0-4fc5-a2b8-72278e042995"),
@@ -137,7 +143,6 @@ public partial class OpenVRInputEngineComponent : Component
             new Guid("7866c6f7-9b4a-4e19-ab7b-4ebf445ead8a"),
             new Guid("72e61d01-ce14-41e2-968c-6518a35e5235"),
             new Guid("ceeca5da-e11a-4ea5-8a16-4823ebea418e"),
-            new Guid("8bc6ef33-831c-450b-bfba-7a6f9f41e324"),
             new Guid("7dff0428-9066-423e-abb6-0561ffe02ce1"),
             new Guid("13be7633-2aea-4301-b875-7e11a7d12ddd"),
             new Guid("9b669c09-2fbe-4960-9914-ddf408913381"),
@@ -233,28 +238,6 @@ public partial class OpenVRInputEngineComponent : Component
             new Guid("ceb695dd-3bb7-4c50-8549-d99f1eb92719"),
         ], null);
 
-        var menuContext = new MenuActionSetContext(_platform);
-
-        AddMapping("/actions/menu", "/actions/menu/in/UIUp", new DigitalInput(),
-        [
-            new Guid("eb1197bb-92fa-46af-98ee-d822504e241e"),
-        ], menuContext);
-
-        AddMapping("/actions/menu", "/actions/menu/in/UIRight", new DigitalInput(),
-        [
-            new Guid("30ce4e7c-a4b6-4c1e-b4fa-d4fdfa8109b9"),
-        ], menuContext);
-
-        AddMapping("/actions/menu", "/actions/menu/in/UIDown", new DigitalInput(),
-        [
-            new Guid("8c13b974-2979-4936-9811-21810a677cdb"),
-        ], menuContext);
-
-        AddMapping("/actions/menu", "/actions/menu/in/UILeft", new DigitalInput(),
-        [
-            new Guid("234928bc-b370-4103-8410-37da935f3581"),
-        ], menuContext);
-        
         AddMapping("/actions/build", "/actions/build/in/DeleteBlock", new DigitalInput(),
         [
             new Guid("0e386bb0-f6b2-474f-968d-bd346683eb77"),
@@ -281,6 +264,8 @@ public partial class OpenVRInputEngineComponent : Component
     }
 
     private partial void OnActionPressed(in VRInputHandle inputHandle, object? value, bool changed, bool active);
+
+    public ulong GetPointerAction(ETrackedControllerRole hand) => hand == ETrackedControllerRole.LeftHand ? _leftPointerAction : _rightPointerAction;
 
     public void PushMappings()
     {

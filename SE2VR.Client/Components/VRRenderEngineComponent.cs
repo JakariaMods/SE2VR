@@ -35,6 +35,9 @@ public partial class VRRenderEngineComponent : EngineComponent
     [Service]
     private readonly IOptions _options;
 
+    [Component]
+    private readonly VRUIEngineComponent _ui;
+
     private OpenVROptions _vrOptions;
     private VRTextureBounds_t _imageBounds = new() { uMax = 1, vMax = 1 };
     private bool _originalFullScreen;
@@ -94,8 +97,6 @@ public partial class VRRenderEngineComponent : EngineComponent
 
             _options.GetOrCreatePart<RenderOptionsPart2>().SetResolution(new Vector2I((int)width, (int)height));
         }
-
-        GameWindowPatch.OnCursorVisibleChanged += GameWindowPatch_OnCursorVisibleChanged;
     }
 
     [Destructor]
@@ -109,8 +110,6 @@ public partial class VRRenderEngineComponent : EngineComponent
         TemporalResourcePatch.Created -= _eyeContext.Register;
         TemporalResourcePatch.Disposed -= _eyeContext.Unregister;
 
-        GameWindowPatch.OnCursorVisibleChanged -= GameWindowPatch_OnCursorVisibleChanged;
-
         if (Instance == this)
             Instance = null;
 
@@ -123,12 +122,6 @@ public partial class VRRenderEngineComponent : EngineComponent
 
             EngineOptionsStorageEngineComponent.NeedsUpdate?.Invoke();
         }
-    }
-
-    private void GameWindowPatch_OnCursorVisibleChanged(bool visible)
-    {
-        if (visible)
-            OpenVR.Overlay?.ShowDashboard(_vrOptions.DashboardWindow);
     }
 
     private void OverrideCamera()
@@ -180,10 +173,18 @@ public partial class VRRenderEngineComponent : EngineComponent
 
     private void PostSceneDraw(MySceneDrawSystem sceneDraw, object target)
     {
-        //Draw right eye
-        if (_vrOptions.CameraMode || IsRightEye)
+        if (IsRightEye)
             return;
 
+        if (_vrOptions.CameraMode)
+        {
+            CopyEyeToTexture(EVREye.Eye_Left, new MyTexture(target));
+            _eyeTexturesReady = true;
+            _ui.DrawMenuToScreen(new MyTexture(target));
+            return;
+        }
+
+        //Draw right eye
         var settings = MyCoreSystems.Settings;
         bool animationWasPaused = MyCoreSystems.AnimationIsPaused;
         try
@@ -224,6 +225,8 @@ public partial class VRRenderEngineComponent : EngineComponent
             view.OnFrameEnd();
 
         _eyeViews[EVREye.Eye_Left].LastCameraPosition = _eyeViews[EVREye.Eye_Right].InvViewD.Translation;
+
+        _ui.DrawMenuToScreen(new MyTexture(target));
     }
 
     private void ApplyEyeViewToRender(EVREye eye)
@@ -281,7 +284,8 @@ public partial class VRRenderEngineComponent : EngineComponent
 
         var queue = MyCoreSystems.DeviceContext.GetDirectQueue().GetQueue();
         SubmitToCompositor(EVREye.Eye_Left, _eyeTextures[EVREye.Eye_Left].D3DResource, queue);
-        SubmitToCompositor(EVREye.Eye_Right, _eyeTextures[_eyeTexturesReady ? EVREye.Eye_Right : EVREye.Eye_Left].D3DResource, queue);
+        bool stereo = _eyeTexturesReady && !_vrOptions.CameraMode;
+        SubmitToCompositor(EVREye.Eye_Right, _eyeTextures[stereo ? EVREye.Eye_Right : EVREye.Eye_Left].D3DResource, queue);
 
         _eyeTexturesReady = false;
         OpenVR.Compositor.PostPresentHandoff();

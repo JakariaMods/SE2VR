@@ -36,6 +36,28 @@ public static class VRUtils
     }
 
     /// <summary>
+    /// Convert VRage matrix to VR matrix. Inverse of <see cref="ToMatrix(HmdMatrix34_t)"/>
+    /// </summary>
+    public static HmdMatrix34_t ToHmdMatrix(this Matrix matrix)
+    {
+        return new HmdMatrix34_t
+        {
+            m0 = matrix.M11, m1 = matrix.M21, m2 = matrix.M31, m3 = matrix.M41,
+            m4 = matrix.M12, m5 = matrix.M22, m6 = matrix.M32, m7 = matrix.M42,
+            m8 = matrix.M13, m9 = matrix.M23, m10 = matrix.M33, m11 = matrix.M43,
+        };
+    }
+
+    /// <summary>
+    /// Convert a VR pose to a ray pointing forward
+    /// </summary>
+    public static Ray ToRay(this HmdMatrix34_t pose)
+    {
+        var matrix = pose.ToMatrix();
+        return new Ray(matrix.Translation, matrix.Forward);
+    }
+
+    /// <summary>
     ///From https://github.com/Math0424/SpaceEngineersVR
     /// </summary>
     public static Matrix ToMatrix(this HmdMatrix44_t hmd)

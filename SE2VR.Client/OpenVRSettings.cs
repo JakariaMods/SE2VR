@@ -31,7 +31,7 @@ public partial class OpenVROptions : ObservableObject, IOptionsPart
     /// When true, the VR controller models are rendered at the tracked hands.
     /// </summary>
     [Notify]
-    private bool _showControllers = true;
+    private bool _showControllers;
 
     /// <summary>
     /// Rotates the scene on the yaw axis; used to allow the player to have a preferred orientation within their playspace.
@@ -89,6 +89,18 @@ public partial class OpenVROptions : ObservableObject, IOptionsPart
     /// </summary>
     [Notify]
     private string _dashboardWindow = "system.desktop.1";
+
+    /// <summary>
+    /// Distance from the head the menu is placed
+    /// </summary>
+    [Notify, Length]
+    private float _menuDistance = 1;
+
+    /// <summary>
+    /// Width of the menu.
+    /// </summary>
+    [Notify, Length]
+    private float _menuWidth = 1.2f;
 
     public void ForceSerialization()
     {

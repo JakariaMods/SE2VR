@@ -51,6 +51,11 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
 
     public bool Initalized { get; private set; }
 
+    /// <summary>
+    /// Raw poses of every tracked device
+    /// </summary>
+    public readonly TrackedDevicePose_t[] DevicePoses = new TrackedDevicePose_t[OpenVR.k_unMaxTrackedDeviceCount];
+
     /// Gameplay
     public RelativeTransform? Head;
     public RelativeTransform? LeftHand;
@@ -134,7 +139,6 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
         sessionBuilder.SessionComponents.WithComponent<HapticsSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<VRRecoilSessionComponent>();
         sessionBuilder.SessionComponents.WithComponent<PhysicsHandClientSessionComponent>();
-        sessionBuilder.SessionComponents.WithComponent<VRPauseSessionComponent>();
 
         if (VROptions.ControlMode == ControlMode.Motion)
             sessionBuilder.SessionComponents.WithComponent<VRInteractionSessionComponent>();
@@ -159,15 +163,14 @@ public partial class OpenVREngineComponent : EngineComponent, ISessionConfigurat
         if (!Initalized)
             return;
 
-        var devicePoses = new TrackedDevicePose_t[OpenVR.k_unMaxTrackedDeviceCount];
-        System.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseStanding, 0, devicePoses);
+        System.GetDeviceToAbsoluteTrackingPose(ETrackingUniverseOrigin.TrackingUniverseStanding, 0, DevicePoses);
 
         for (uint device = 0; device < OpenVR.k_unMaxTrackedDeviceCount; device++)
         {
             var activity = System.GetTrackedDeviceActivityLevel(device);
             bool lostTracking = activity == EDeviceActivityLevel.k_EDeviceActivityLevel_Unknown | activity == EDeviceActivityLevel.k_EDeviceActivityLevel_Standby | activity == EDeviceActivityLevel.k_EDeviceActivityLevel_Idle;
 
-            var matrix = devicePoses[device].mDeviceToAbsoluteTracking;
+            var matrix = DevicePoses[device].mDeviceToAbsoluteTracking;
 
             var trackedDeviceClass = System.GetTrackedDeviceClass(device);
             if (trackedDeviceClass == ETrackedDeviceClass.Controller && VROptions.ControlMode == ControlMode.Motion)
