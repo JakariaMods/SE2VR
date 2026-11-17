@@ -43,11 +43,7 @@ https://www.youtube.com/watch?v=B1hnT4PmXbg
 
 # How to play
 
-* This is a Standing or Sitting VR experience, make sure you are positioned at the center of the play-space. You can use SteamVR to reset the standing/seated position if it is in a different spot.
-
-* UI interaction is currently done using the VR dashboard. Whenever mouse input is accepted, the VR dashboard will automatically open, where you can use your VR hand to drag and click on the projected screen.
-
-* To close the in-game UI, close the dashboard. If the UI does not automatically close, report it with repeatable STR, logs, etc.
+* This is a Standing or Sitting VR experience, make sure you are positioned at the center of the play-space (facing the same orientation as your character's feet). You can use SteamVR to reset the standing/seated position if it is in a different spot.
 
 # Settings/Options
 
