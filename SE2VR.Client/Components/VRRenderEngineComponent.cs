@@ -48,7 +48,8 @@ public partial class VRRenderEngineComponent : EngineComponent
     private readonly TrackedDevicePose_t[] _renderPoses = new TrackedDevicePose_t[OpenVR.k_unMaxTrackedDeviceCount];
     private MatrixD _head = MatrixD.Identity;
     private readonly VREyeContext _eyeContext = new();
-    private readonly VREyeFsr _fsr = new();
+    private readonly VREyeUpscaler _fsr = new();
+    private readonly VREyeUpscaler _dlss = new();
     private MyRenderView _centerView = null!;
     private MyRenderView _centerPreviousView = null!;
     private readonly Dictionary<EVREye, MyTexture> _eyeTextures = new();
@@ -199,7 +200,8 @@ public partial class VRRenderEngineComponent : EngineComponent
             ApplyEyeViewToRender(EVREye.Eye_Right);
             IsRightEye = true;
             _eyeContext.BeginRightEye();
-            _fsr.BeginRightEye();
+            _fsr.BeginRightEye(sceneDraw.Fsr);
+            _dlss.BeginRightEye(sceneDraw.Dlss);
 
             MyCoreSystems.AnimationIsPaused = true;
             MyCoreSystems.BeginDraw();
@@ -214,7 +216,8 @@ public partial class VRRenderEngineComponent : EngineComponent
         {
             if (IsRightEye)
             {
-                _fsr.EndRightEye();
+                _dlss.EndRightEye(sceneDraw.Dlss);
+                _fsr.EndRightEye(sceneDraw.Fsr);
                 _eyeContext.EndRightEye();
             }
 

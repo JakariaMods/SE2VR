@@ -13,7 +13,7 @@ public static class SceneDrawSystemPatch
     public static Action<MySceneDrawSystem, object>? PreDraw;
     public static Action<MySceneDrawSystem, object>? PostDraw;
 
-    static MethodBase? TargetMethod() => AccessTools.Method(MySceneDrawSystem.Type, "Draw");
+    static MethodBase? TargetMethod() => AccessTools.Method(AccessTools.TypeByName("Keen.VRage.Render12.Core.Systems.SceneDrawSystem"), "Draw");
 
     [HarmonyPrefix]
     static void Prefix(object __instance, object[] __args) => PreDraw?.Invoke(new MySceneDrawSystem(__instance), __args[0]);
