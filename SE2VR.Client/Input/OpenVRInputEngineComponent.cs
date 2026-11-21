@@ -43,6 +43,8 @@ public partial class OpenVRInputEngineComponent : Component
     [Service]
     private readonly IOptions _options;
 
+    [Service]
+    private readonly IPlatformWindows _platform;
 
     [Component]
     private readonly EngineDataLoaderComponent _engineDataLoader;
@@ -260,6 +262,11 @@ public partial class OpenVRInputEngineComponent : Component
         [
             new Guid("d7e89256-139e-4394-ba9f-094829416245"),
         ], null);
+
+        AddMapping("/actions/menu", "/actions/menu/in/VerticalScroll", new AnalogInput(1),
+        [
+            new Guid("3129e85d-6f77-41f5-80b2-d4f93217797b"),
+        ], new MenuActionSetContext(_platform));
 
         PushMappings();
     }

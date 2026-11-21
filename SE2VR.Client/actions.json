@@ -64,6 +64,10 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/menu/in/VerticalScroll",
+      "type": "vector2"
+    },
+    {
       "name": "/actions/menu/in/UIUp",
       "type": "boolean"
     },
@@ -173,6 +177,7 @@
       "/actions/build/in/SlideRotate": "Slide/Rotate",
       "/actions/paint/in/CycleColor": "Cycle Paint Palette Color",
       "/actions/default/in/CycleToolbarTile": "Cycle Toolbar Tile",
+      "/actions/menu/in/VerticalScroll": "Menu Vertical Scroll",
       "/actions/default/in/SpeedBoost": "Sprint/Speed Boost",
       "/actions/default/in/ToggleJetpack": "Toggle Jetpack",
       "/actions/default/in/ToggleLights": "Toggle Lights",
