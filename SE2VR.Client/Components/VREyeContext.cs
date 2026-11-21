@@ -11,8 +11,18 @@ public class VREyeContext
     private readonly Dictionary<object, TexturePair> _pairs = new();
     private readonly List<object> _exchanged = new();
 
+    private MyRTGIContext? _leftRTGIContext;
+    private MyRTGIContext? _rightRTGIContext;
+    private bool _creatingRightContext;
+
+    private object? _leftTLASBuffers;
+    private object? _rightTLASBuffers;
+
     public void Register(object resource)
     {
+        if (_creatingRightContext)
+            return; //Don't duplicate the right eye itself
+
         _resources.Add(resource);
     }
 
@@ -22,6 +32,12 @@ public class VREyeContext
 
         if (!_exchanged.Contains(resource) && _pairs.Remove(resource, out var pair))
             pair.Dispose();
+    }
+
+    public void ResetContexts()
+    {
+        _rightRTGIContext?.Dispose();
+        _rightRTGIContext = null;
     }
 
     public void BeginRightEye()
@@ -48,6 +64,26 @@ public class VREyeContext
                 pair.Exchange(temporal);
                 _exchanged.Add(resource);
             }
+
+            _leftRTGIContext = MyRTGIContext.CurrentContext;
+            if (_leftRTGIContext != null)
+            {
+                if (_rightRTGIContext == null) //Lazy
+                {
+                    _creatingRightContext = true;
+                    _rightRTGIContext = MyRTGIContext.Create();
+                    _creatingRightContext = false;
+                }
+
+                MyRTGIContext.CurrentContext = _rightRTGIContext;
+            }
+
+            _leftTLASBuffers = MyRayTracingScene.TLASBuffers;
+            if (_leftTLASBuffers != null)
+            {
+                _rightTLASBuffers ??= MyRayTracingScene.CreateEmptyTLASBuffers(_leftTLASBuffers);
+                MyRayTracingScene.TLASBuffers = _rightTLASBuffers;
+            }
         }
         finally
         {
@@ -57,6 +93,18 @@ public class VREyeContext
 
     public void EndRightEye()
     {
+        if (_leftRTGIContext != null)
+        {
+            MyRTGIContext.CurrentContext = _leftRTGIContext;
+            _leftRTGIContext = null;
+        }
+
+        if (_leftTLASBuffers != null)
+        {
+            MyRayTracingScene.TLASBuffers = _leftTLASBuffers;
+            _leftTLASBuffers = null;
+        }
+
         //Swap/destroy textures
         if (_exchanged.Count == 0)
             return;

@@ -76,6 +76,7 @@ public partial class VRRenderEngineComponent : EngineComponent
         Render12EngineComponentPatch.PostDraw += PostDraw; //Render thread
         TemporalResourcePatch.Created += _eyeContext.Register; //Render thread
         TemporalResourcePatch.Disposed += _eyeContext.Unregister; //Render thread
+        DrawContextsResetPatch.Reset += _eyeContext.ResetContexts; //Render thread
 
         uint width = 0, height = 0;
         OpenVR.System.GetRecommendedRenderTargetSize(ref width, ref height);
@@ -109,6 +110,7 @@ public partial class VRRenderEngineComponent : EngineComponent
         Render12EngineComponentPatch.PostDraw -= PostDraw;
         TemporalResourcePatch.Created -= _eyeContext.Register;
         TemporalResourcePatch.Disposed -= _eyeContext.Unregister;
+        DrawContextsResetPatch.Reset -= _eyeContext.ResetContexts;
 
         if (Instance == this)
             Instance = null;
@@ -192,6 +194,7 @@ public partial class VRRenderEngineComponent : EngineComponent
             _eyeViews[EVREye.Eye_Left] = settings.RenderView;
             CopyEyeToTexture(EVREye.Eye_Left, new MyTexture(target));
 
+            MyCoreSystems.FlushQueues();
             MyCoreSystems.EndDraw();
             ApplyEyeViewToRender(EVREye.Eye_Right);
             IsRightEye = true;
@@ -248,6 +251,7 @@ public partial class VRRenderEngineComponent : EngineComponent
 
         MyCoreSystems.Settings.RenderView = view;
         MyCoreSystems.Settings.PreviousRenderView = history ?? view;
+        MyIRCacheResources.InvalidateView();
     }
 
     private void CopyEyeToTexture(EVREye eye, MyTexture source)
