@@ -263,7 +263,7 @@ public partial class OpenVRInputEngineComponent : Component
             new Guid("d7e89256-139e-4394-ba9f-094829416245"),
         ], null);
 
-        AddMapping("/actions/menu", "/actions/menu/in/VerticalScroll", new AnalogInput(1),
+        AddMapping("/actions/menu", "/actions/menu/in/VerticalScroll", new AnalogInput(1, invert: true),
         [
             new Guid("3129e85d-6f77-41f5-80b2-d4f93217797b"),
         ], new MenuActionSetContext(_platform));
