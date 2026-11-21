@@ -226,6 +226,7 @@ public partial class OpenVRInputEngineComponent : Component
         AddMapping("/actions/default", "/actions/default/in/Pause", new DigitalInput(),
         [
             new Guid("3f82acb2-793c-4ad0-8e6b-b179c9fa8953"),
+            new Guid("9cda2d89-202c-458e-bd48-32b7cf4a621f"),
         ], null);
 
         AddMapping("/actions/default", "/actions/default/in/Inventory", new DigitalInput(),
