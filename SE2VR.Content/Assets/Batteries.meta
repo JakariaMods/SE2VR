@@ -1,0 +1,12 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3169",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3169"
+  },
+  "$Type": "VRage:Keen.VRage.ContentPipeline.Metafiles.MetaData",
+  "$Value": {
+    "AssetID": "b56cda63-7167-46ba-a9b7-0eccd4b11639",
+    "InternalItems": []
+  }
+}

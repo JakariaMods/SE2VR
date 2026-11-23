@@ -1,0 +1,29 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3169",
+    "SE2VR.Simulation": "1.1.6.1",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3169"
+  },
+  "$Type": "VRage:Keen.VRage.DCS.Definitions.EntityCompositeDefinitionObjectBuilder",
+  "$Value": {
+    "Components": {
+      "$DeltaEncoded": true,
+      "Keys": [
+        "a936783d-7a41-4244-8b1a-28698e215b96",
+        "a0567fa7-280d-483a-a45b-fbe3af1b6bca"
+      ],
+      "Changed": [
+        {
+          "Kind": "Insert",
+          "Index": 1,
+          "Value": {
+            "Definition": "99891f08-64e8-4c6f-aaa9-4c2783ba0ed1",
+            "Type": "SE2VR.Simulation:SE2VR.Simulation.Components.InventorySlotsInsertServerComponent"
+          }
+        }
+      ],
+      "Removed": []
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3169",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3169"
+  },
+  "$Type": "VRage:Keen.VRage.ContentPipeline.Definitions.PartialDefinitionDiff",
+  "$Value": {
+    "BaseDefinition": "f41b5ee5-b489-4a42-a81a-1bbb4ce9dd0e",
+    "PartialDefinitionKind": "Override",
+    "Manipulator": {
+      "_entity": {
+        "ObjectBuilders": {
+          "$DeltaEncoded": true,
+          "Keys": [
+            "a936783d-7a41-4244-8b1a-28698e215b96",
+            "a0567fa7-280d-483a-a45b-fbe3af1b6bca"
+          ],
+          "Changed": [
+            {
+              "Kind": "Insert",
+              "Index": 1,
+              "Value": null
+            }
+          ],
+          "Removed": []
+        }
+      }
+    },
+    "DefinitionType": "VRage:Keen.VRage.Core.Game.Definitions.PrefabDefinition",
+    "PriorityOverride": false
+  }
+}

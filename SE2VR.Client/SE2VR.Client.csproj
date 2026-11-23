@@ -81,6 +81,10 @@
         <HintPath>..\GameLibs\VRage.Animation.Client.dll</HintPath>
         <Private>False</Private>
     </Reference>
+    <Reference Include="VRage.Audio">
+        <HintPath>..\GameLibs\VRage.Audio.dll</HintPath>
+        <Private>False</Private>
+    </Reference>
     <Reference Include="VRage.Core">
         <HintPath>..\GameLibs\VRage.Core.dll</HintPath>
         <Private>False</Private>

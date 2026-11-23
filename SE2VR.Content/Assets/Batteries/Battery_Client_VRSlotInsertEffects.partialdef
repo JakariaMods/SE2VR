@@ -1,0 +1,35 @@
+{
+  "$Bundles": {
+    "Game2": "4.0.0.3169",
+    "SE2VR.Client": "1.1.6.1",
+    "System.Runtime": "1.0.0.0",
+    "VRage": "4.0.0.3169"
+  },
+  "$Type": "VRage:Keen.VRage.ContentPipeline.Definitions.PartialDefinitionDiff",
+  "$Value": {
+    "BaseDefinition": "8b6b08b9-06fd-4515-af76-4d53b19b0453",
+    "PartialDefinitionKind": "Override",
+    "Manipulator": {
+    "Components": {
+      "$DeltaEncoded": true,
+      "Keys": [
+        "273ebbf5-4c24-4e39-89b3-5e9791b47813",
+        "f4870968-d70b-4542-8d16-84af827ce1b3"
+      ],
+      "Changed": [
+        {
+          "Kind": "Insert",
+          "Index": 1,
+          "Value": {
+            "Definition": null,
+            "Type": "SE2VR.Client:SE2VR.Client.Components.InventorySlotEffectsComponent"
+          }
+        }
+      ],
+      "Removed": []
+    }
+    },
+    "DefinitionType": "VRage:Keen.VRage.DCS.Definitions.EntityCompositeDefinition",
+    "PriorityOverride": false
+  }
+}
